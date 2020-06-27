@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_bwEFULhKEeq7p_NY6_Zziw" name="Twitter_Project">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_ZQiAcLhNEeqgYfcAg6jwdg" name="Utilizzatore">
+    <eAnnotations xmi:id="_ZQlq0LhNEeqgYfcAg6jwdg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <details xmi:id="_ZQlq0bhNEeqgYfcAg6jwdg" key="Human"/>
+    </eAnnotations>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_sUlgMLhNEeqgYfcAg6jwdg" name="Richiedere metadati"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_v7OPsLhNEeqgYfcAg6jwdg" name="Richiedere dati">
+    <include xmi:id="_jdLWcLhUEeqgYfcAg6jwdg" addition="_x43oILhNEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_x43oILhNEeqgYfcAg6jwdg" name="Restituire statistiche sui dati">
+    <extend xmi:id="_T_0GALhTEeqgYfcAg6jwdg" extendedCase="_Km4vILhQEeqgYfcAg6jwdg"/>
+    <extend xmi:id="_UbIwELhTEeqgYfcAg6jwdg" extendedCase="_B3sfgLhSEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_RfpBkLhOEeqgYfcAg6jwdg" memberEnd="_Rf1O0LhOEeqgYfcAg6jwdg _Rf114LhOEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_Rf1O0LhOEeqgYfcAg6jwdg" type="_ZQiAcLhNEeqgYfcAg6jwdg" association="_RfpBkLhOEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_Rf114LhOEeqgYfcAg6jwdg" type="_sUlgMLhNEeqgYfcAg6jwdg" association="_RfpBkLhOEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_SPg_ULhOEeqgYfcAg6jwdg" memberEnd="_SPg_UbhOEeqgYfcAg6jwdg _SPhmYLhOEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_SPg_UbhOEeqgYfcAg6jwdg" type="_ZQiAcLhNEeqgYfcAg6jwdg" association="_SPg_ULhOEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_SPhmYLhOEeqgYfcAg6jwdg" type="_v7OPsLhNEeqgYfcAg6jwdg" association="_SPg_ULhOEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_TSF2oLhOEeqgYfcAg6jwdg" memberEnd="_TSF2obhOEeqgYfcAg6jwdg _TSF2orhOEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_TSF2obhOEeqgYfcAg6jwdg" type="_ZQiAcLhNEeqgYfcAg6jwdg" association="_TSF2oLhOEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_TSF2orhOEeqgYfcAg6jwdg" type="_x43oILhNEeqgYfcAg6jwdg" association="_TSF2oLhOEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Km4vILhQEeqgYfcAg6jwdg" name="Filtrare: data, dimensione testo, contenuti multimediali "/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_B3sfgLhSEeqgYfcAg6jwdg" name="Restituire la top N delle parole"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_nYSzELhSEeqgYfcAg6jwdg" name="UseCase8"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ra2CgLhSEeqgYfcAg6jwdg" memberEnd="_ra2CgbhSEeqgYfcAg6jwdg _ra2CgrhSEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_ra2CgbhSEeqgYfcAg6jwdg" association="_ra2CgLhSEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_ra2CgrhSEeqgYfcAg6jwdg" association="_ra2CgLhSEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6xVrYLhSEeqgYfcAg6jwdg" memberEnd="_6xVrYbhSEeqgYfcAg6jwdg _6xVrYrhSEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_6xVrYbhSEeqgYfcAg6jwdg" association="_6xVrYLhSEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_6xVrYrhSEeqgYfcAg6jwdg" association="_6xVrYLhSEeqgYfcAg6jwdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3xnDgLhVEeqgYfcAg6jwdg" memberEnd="_3xnqkLhVEeqgYfcAg6jwdg _3xnqkbhVEeqgYfcAg6jwdg">
+    <ownedEnd xmi:id="_3xnqkLhVEeqgYfcAg6jwdg" type="_ZQiAcLhNEeqgYfcAg6jwdg" association="_3xnDgLhVEeqgYfcAg6jwdg"/>
+    <ownedEnd xmi:id="_3xnqkbhVEeqgYfcAg6jwdg" type="_Km4vILhQEeqgYfcAg6jwdg" association="_3xnDgLhVEeqgYfcAg6jwdg"/>
+  </packagedElement>
+</uml:Model>
