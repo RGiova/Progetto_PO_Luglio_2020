@@ -19,7 +19,6 @@ public static void ParseText (JSONArray objp) {
       Mdl.setURL(GetUrlsHashtags.GetUrls((JSONObject)p1.get("entities")));
       Mdl.setImg(GetImage.GetImg((JSONObject)p1.get("entities")));
       ModelList.ListAdd(Mdl);
-
 	}
 }
 
