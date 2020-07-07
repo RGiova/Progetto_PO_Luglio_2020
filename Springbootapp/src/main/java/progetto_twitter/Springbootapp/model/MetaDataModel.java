@@ -5,12 +5,6 @@ private String alias;
 private String sourceField;
 private String type;
 
-public MetaDataModel(String alias, String sourceField, String type) {
-	super();
-	this.alias = alias;
-	this.sourceField = sourceField;
-	this.type = type;
-}
 public String getAlias() {
 	return alias;
 }
