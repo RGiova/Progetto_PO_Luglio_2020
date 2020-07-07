@@ -4,14 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import progetto_twitter.Springbootapp.web.*;
 import progetto_twitter.Springbootapp.GETJson.GETJson;
 import progetto_twitter.Springbootapp.GETJson.JSONParse;
 import progetto_twitter.Springbootapp.model.*;
+import progetto_twitter.Springbootapp.util.Metadata;
 @RestController
 public class Springbootcontroller {
-   @Autowired
-   private Metadata MetaData;
+
 @GetMapping("/Entities")
 	public ResponseEntity<Object> GETData() {
   return new ResponseEntity<Object>(GETJson.GETData(),HttpStatus.OK);

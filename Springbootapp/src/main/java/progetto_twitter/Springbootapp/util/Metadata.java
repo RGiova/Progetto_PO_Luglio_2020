@@ -12,7 +12,7 @@ public class Metadata {
 	private ArrayList<MetaDataModel> MDArray = new ArrayList<MetaDataModel>();
 	private MetaDataModel Mdl = new MetaDataModel();
 
-	public  ArrayList<MetaDataModel> MetaData() {
+	public ArrayList<MetaDataModel> MetaData() {
 		for (int i = 0; i < 8; i++) {
 			switch (i) {
 			case 0:

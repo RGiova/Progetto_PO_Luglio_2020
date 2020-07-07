@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import progetto_twitter.Springbootapp.model.*;
-import progetto_twitter.Springbootapp.web.Metadata;
 public class JSONParse {
 	private static JSONObject p1 = new JSONObject();
 public static void ParseText (JSONArray objp) {
