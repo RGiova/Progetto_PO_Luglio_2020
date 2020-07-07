@@ -1,13 +1,9 @@
 package progetto_twitter.Springbootapp.filter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Vector;
 
 import progetto_twitter.Springbootapp.model.*;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class ReadFilter {
@@ -16,7 +12,7 @@ public class ReadFilter {
 	private String fields = "date,text,hashtags,Url,Img";// includere and e or
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
 	private HashMap<String, String> Object = new HashMap<String, String>();
-	private Object AObject = new Object();
+	private Object values = new Object();
 
 	public String getField() {
 		return field;
@@ -32,6 +28,14 @@ public class ReadFilter {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public Object getValues() {
+		return values;
+	}
+
+	public void setValues(Object values) {
+		this.values = values;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -51,12 +55,13 @@ public class ReadFilter {
 		setField(Afields[k]);
 		while (j < Aoperators.length) {
 			if (Object.containsKey(Aoperators[j])) {
-				AObject = Object.get(Aoperators[j]);
-				k=j;
+				setValues(Object.get(Aoperators[j]));
+				k = j;
 			}
 			j++;
 		}
 		setOperator(Aoperators[k]);
 
 	}
+
 }
