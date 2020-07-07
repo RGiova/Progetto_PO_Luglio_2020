@@ -37,9 +37,6 @@ public class ReadFilter {
 	@SuppressWarnings("unchecked")
 	public void Filter(JSONObject obj) {
 		String[] Afields = fields.split(",");
-		System.out.println(fields.split(","));
-		for (String a : fields.split(","))
-			System.out.println(a);
 		String[] Aoperators = operators.split(",");
 		int i = 0;
 		int j = 0;
