@@ -7,7 +7,7 @@ private long post_id;
 private String date;
 private String text;
 private Vector<String> hashtags;
-private Vector<String> URL;
+private Vector<String> Url;
 private Vector<ImageModel> Img;
 private String name;
 private long user_id;
@@ -38,10 +38,10 @@ public void setHashtags(Vector<String> hashtags) {
 	this.hashtags = hashtags;
 }
 public Vector<String> getURL() {
-	return URL;
+	return Url;
 }
 public void setURL(Vector<String> uRL) {
-	URL = uRL;
+	Url = uRL;
 }
 public Vector<ImageModel> getImg() {
 	return Img;
