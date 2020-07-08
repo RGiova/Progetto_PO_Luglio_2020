@@ -20,12 +20,10 @@ public class Springbootcontroller {
 	public ResponseEntity<Object> GETJ() {
 		return new ResponseEntity<Object>(GETJson.GETJ(), HttpStatus.OK);
 	}
-
 	@GetMapping("/metadata")
 	public ResponseEntity<Object> GETMetaData() {
 		return new ResponseEntity<Object>(ServiceImpl.GETMetaData(), HttpStatus.OK);
 	}
-
 	@GetMapping("/data")
 	public ResponseEntity<Object> GETData() {
 		return new ResponseEntity<Object>(ServiceImpl.GETData(), HttpStatus.OK);

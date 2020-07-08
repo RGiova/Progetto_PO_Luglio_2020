@@ -24,7 +24,7 @@ public class ReadFilter extends FilterModel {
 		int k = 0;
 		while (i < Afields.length) {
 			if (obj.containsKey(Afields[i])) {
-				Object = obj.get(Afields[i]);// (HashMap<String, String>)
+				Object = obj.get(Afields[i]);
 				k = i;
 			}
 			i++;
@@ -48,15 +48,14 @@ public class ReadFilter extends FilterModel {
 			j++;
 		}
 		setOperator(Aoperators[k]);
+		FilterStudy.Filtered(getField(),getOperator(),getValues());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void Filter(Object Obj) {
 		setOperator(getField());
 		setField(null);	
 		setValues(Obj);
-    Iterator i = ((ArrayList<String>)Obj).iterator();
-    System.out.println(i.next());
 	}
+
 
 }
