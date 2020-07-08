@@ -1,67 +1,62 @@
 package progetto_twitter.Springbootapp.filter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import progetto_twitter.Springbootapp.model.*;
 
 import org.json.simple.JSONObject;
 
-public class ReadFilter {
-	private String field;
-	private String operator;
-	private String fields = "date,text,hashtags,Url,Img";// includere and e or
+public class ReadFilter extends FilterModel {
+	private String fields = "date,text,hashtags,Url,Img,$or,$and";// includere and e or
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
-	private HashMap<String, String> Object = new HashMap<String, String>();
-	private Object values = new Object();
+	private Object Object = new Object();
 
-	public String getField() {
-		return field;
+	public ReadFilter() {
+		super();
 	}
 
-	public void setField(String field) {
-		this.field = field;
-	}
-
-	public String getOperator() {
-		return operator;
-	}
-
-	public void setOperator(String operator) {
-		this.operator = operator;
-	}
-
-	public Object getValues() {
-		return values;
-	}
-
-	public void setValues(Object values) {
-		this.values = values;
-	}
-
-	@SuppressWarnings("unchecked")
 	public void Filter(JSONObject obj) {
 		String[] Afields = fields.split(",");
 		String[] Aoperators = operators.split(",");
 		int i = 0;
-		int j = 0;
 		int k = 0;
 		while (i < Afields.length) {
 			if (obj.containsKey(Afields[i])) {
-				Object = (HashMap<String, String>) obj.get(Afields[i]);
+				Object = obj.get(Afields[i]);// (HashMap<String, String>)
 				k = i;
 			}
 			i++;
 		}
 		setField(Afields[k]);
+		if (getField().equals("$or") || getField().equals("$and"))
+			Filter(Object);
+		else
+			Filter(Object, Aoperators);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void Filter(Object Obj, String[] Aoperators) {
+		int j = 0;
+		int k = 0;
 		while (j < Aoperators.length) {
-			if (Object.containsKey(Aoperators[j])) {
-				setValues(Object.get(Aoperators[j]));
+			if (((HashMap<String, String>) Object).containsKey(Aoperators[j])) {
+				setValues(((HashMap<String, String>) Object).get(Aoperators[j]));
 				k = j;
 			}
 			j++;
 		}
 		setOperator(Aoperators[k]);
+	}
 
+	@SuppressWarnings("unchecked")
+	public void Filter(Object Obj) {
+		setOperator(getField());
+		setField(null);	
+		setValues(Obj);
+    Iterator i = ((ArrayList<String>)Obj).iterator();
+    System.out.println(i.next());
 	}
 
 }
