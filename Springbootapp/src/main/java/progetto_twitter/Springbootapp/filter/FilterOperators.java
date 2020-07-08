@@ -26,7 +26,7 @@ public class FilterOperators {
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
 			while(J.hasNext()) {
-			if(!SearchMethod(fields, obj).equals(J.next()));
+			if(!SearchMethod(fields, obj).equals(J.next()))
 			obj.setTo_insert(false);
 			}
 		}
@@ -38,7 +38,7 @@ public class FilterOperators {
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
 			while(J.hasNext()) {
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 			}
 		}
@@ -49,7 +49,7 @@ public class FilterOperators {
 		Iterator i = ModelList.getMList().iterator();
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 		}
 	}
@@ -58,7 +58,7 @@ public class FilterOperators {
 		Iterator i = ModelList.getMList().iterator();
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 		}
 	}
@@ -67,7 +67,7 @@ public class FilterOperators {
 		Iterator i = ModelList.getMList().iterator();
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 		}
 	}
@@ -76,7 +76,7 @@ public class FilterOperators {
 		Iterator i = ModelList.getMList().iterator();
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 		}
 	}
@@ -85,7 +85,7 @@ public class FilterOperators {
 		Iterator i = ModelList.getMList().iterator();
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
-			if(SearchMethod(fields, obj).equals(values));
+			if(SearchMethod(fields, obj).equals(values))
 			obj.setTo_insert(false);
 		}
 	}
