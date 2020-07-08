@@ -26,7 +26,7 @@ public class FilterOperators {
 		while (i.hasNext()) {
 			obj=(JSONModel) i.next();
 			while(J.hasNext()) {
-			if(!SearchMethod(fields, obj).equals(values));
+			if(!SearchMethod(fields, obj).equals(J.next()));
 			obj.setTo_insert(false);
 			}
 		}
@@ -97,7 +97,6 @@ public class FilterOperators {
 			System.out.println("get" + Name.substring(0, 1).toUpperCase()+Name.substring(1));
 			m = Class.getClass().getMethod("get" + Name.substring(0, 1).toUpperCase()+Name.substring(1));
 			obj = m.invoke(Class);
-			int k= 0;
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
