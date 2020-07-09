@@ -9,7 +9,7 @@ import progetto_twitter.Springbootapp.model.*;
 import org.json.simple.JSONObject;
 
 public class ReadFilter extends FilterModel {
-	private String fields = "date,text,hashtags,Url,Img,$or,$and";// includere and e or
+	private String fields = "date,text,hashtags,Url,w,h,dimension,$or,$and";
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
 	private Object Object = new Object();
 
