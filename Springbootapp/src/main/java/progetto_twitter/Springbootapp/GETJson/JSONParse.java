@@ -1,16 +1,14 @@
 package progetto_twitter.Springbootapp.GETJson;
+import progetto_twitter.Springbootapp.util.*;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
 import progetto_twitter.Springbootapp.model.*;
-import progetto_twitter.Springbootapp.util.ModifyDate;
 public class JSONParse {
 	private static JSONObject p1 = new JSONObject();
 public static void ParseText (JSONArray objp) {
-      Iterator i = objp.iterator();
+      Iterator<?> i = objp.iterator();
 	  while(i.hasNext()) {
 	  JSONModel Mdl = new JSONModel();
       p1 = (JSONObject)i.next();
@@ -23,6 +21,7 @@ public static void ParseText (JSONArray objp) {
       Mdl.setName(GetUserInfo.GetName((JSONObject)p1.get("user")));
       Mdl.setUser_id(GetUserInfo.GetId((JSONObject)p1.get("user")));
       ModelList.ListAdd(Mdl);
+      ListToPush.ListAdd(Mdl);
 	}
 }
 

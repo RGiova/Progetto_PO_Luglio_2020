@@ -1,15 +1,16 @@
 package progetto_twitter.Springbootapp.model;
 
+import java.util.ArrayList;
+
 public class FilterModel {
 	private String field;
 	private String operator;
-	private Object values = new Object();
+	private ArrayList<String> values = new ArrayList<String>();
 
 	public FilterModel() {
 		super();
 		this.field = null;
 		this.operator = null;
-		this.values = null;
 	}
 
 	public String getField() {
@@ -28,13 +29,18 @@ public class FilterModel {
 		this.operator = operator;
 	}
 
-	public Object getValues() {
+	public ArrayList<String> getValues() {
 		return values;
 	}
 
-	public void setValues(Object values) {
+	public void setValues(ArrayList<String> values) {
 		this.values = values;
 	}
-
+	public void AddValue(String pippo) {
+		String[] ToAddValue = pippo.split(",");
+		for (int i = 0; i<ToAddValue.length;i++)
+		values.add(ToAddValue[i]);
+		}
+	
 
 }

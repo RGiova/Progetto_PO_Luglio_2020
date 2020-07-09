@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import progetto_twitter.Springbootapp.filter.ReadFilter;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
-import progetto_twitter.Springbootapp.model.ModelList;
+import progetto_twitter.Springbootapp.util.*;
 import progetto_twitter.Springbootapp.util.Metadata;
 
 public class ServiceImpl {

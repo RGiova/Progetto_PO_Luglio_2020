@@ -1,5 +1,7 @@
-package progetto_twitter.Springbootapp.model;
+package progetto_twitter.Springbootapp.util;
 import java.util.*;
+
+import progetto_twitter.Springbootapp.model.JSONModel;
 public class ModelList {
 	private static ArrayList<JSONModel> MList = new ArrayList<JSONModel>();
 	

@@ -6,10 +6,11 @@ import java.util.Iterator;
 
 import progetto_twitter.Springbootapp.model.*;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class ReadFilter extends FilterModel {
-	private String fields = "date,text,hashtags,Url,w,h,dimension,$or,$and";
+public class ReadFilter extends FilterModel implements ReadFilterInterface {
+	private String fields = "date,text,w,h,dimension";
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
 	private Object Object = new Object();
 
@@ -30,10 +31,7 @@ public class ReadFilter extends FilterModel {
 			i++;
 		}
 		setField(Afields[k]);
-		if (getField().equals("$or") || getField().equals("$and"))
-			Filter(Object);
-		else
-			Filter(Object, Aoperators);
+	    Filter(Object, Aoperators);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -42,20 +40,15 @@ public class ReadFilter extends FilterModel {
 		int k = 0;
 		while (j < Aoperators.length) {
 			if (((HashMap<String, String>) Object).containsKey(Aoperators[j])) {
-				setValues(((HashMap<String, String>) Object).get(Aoperators[j]));
+				System.out.println(((HashMap<String, String>) Object).get(Aoperators[j]));
+				AddValue(((HashMap<String, String>) Object).get(Aoperators[j]));
 				k = j;
 			}
 			j++;
 		}
 		setOperator(Aoperators[k]);
-		FilterStudy.Filtered(getField(),getOperator(),getValues());
+		FilterImpl obj = new FilterImpl();
+		obj.Filter(getField(),  getValues(), getOperator());
 	}
-
-	public void Filter(Object Obj) {
-		setOperator(getField());
-		setField(null);	
-		setValues(Obj);
-	}
-
 
 }
