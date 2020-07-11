@@ -18,12 +18,17 @@ public class ServiceImpl {
 	}
 	
 	public static ArrayList<JSONModel> GETData(){
-		return ModelList.getMList();
+		return ListsCreate.Lists.getMList();
 	}
-	public static ReadFilter GETFilter(JSONObject obj) {
+	public static void GETFilter(JSONObject obj) {
 		ReadFilter Prova = new ReadFilter();
-		Prova.Filter(obj);
-		return Prova;
-		
+		Prova.FirstFilter(obj);
+	}
+	public static ArrayList<JSONModel> GETDataFiltered(){
+		if (ListsCreate.Lists.getToFilterList()!=null)
+		ListsCreate.Lists.getToFilterList().clear();
+		if (ListsCreate.Lists.getToFilterList2()!=null)
+		ListsCreate.Lists.getToFilterList2().clear();
+		return ListsCreate.Lists.getToPushList();
 	}
 }
