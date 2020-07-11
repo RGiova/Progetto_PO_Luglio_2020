@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import progetto_twitter.Springbootapp.model.*;
 public class JSONParse {
 	private static JSONObject p1 = new JSONObject();
+	
 public static void ParseText (JSONArray objp) {
       Iterator<?> i = objp.iterator();
 	  while(i.hasNext()) {
@@ -20,8 +21,7 @@ public static void ParseText (JSONArray objp) {
       Mdl.setPost_id((long)p1.get("id"));
       Mdl.setName(GetUserInfo.GetName((JSONObject)p1.get("user")));
       Mdl.setUser_id(GetUserInfo.GetId((JSONObject)p1.get("user")));
-      ModelList.ListAdd(Mdl);
-      ListToPush.ListAdd(Mdl);
+      ListsCreate.Lists.MListAdd(Mdl);
 	}
 }
 

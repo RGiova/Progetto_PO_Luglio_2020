@@ -1,5 +1,7 @@
 package progetto_twitter.Springbootapp.controller;
 
+import java.util.Collections;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,15 +13,11 @@ import progetto_twitter.Springbootapp.GETJson.JSONParse;
 import progetto_twitter.Springbootapp.filter.ReadFilter;
 import progetto_twitter.Springbootapp.model.*;
 import progetto_twitter.Springbootapp.service.ServiceImpl;
+import progetto_twitter.Springbootapp.util.ListsCreate;
 import progetto_twitter.Springbootapp.util.Metadata;
 
 @RestController
 public class Springbootcontroller {
-
-	@GetMapping("/Entities")
-	public ResponseEntity<Object> GETJ() {
-		return new ResponseEntity<Object>(GETJson.GETJ(), HttpStatus.OK);
-	}
 	@GetMapping("/metadata")
 	public ResponseEntity<Object> GETMetaData() {
 		return new ResponseEntity<Object>(ServiceImpl.GETMetaData(), HttpStatus.OK);
@@ -30,8 +28,10 @@ public class Springbootcontroller {
 	}
 	@PostMapping("/filter")
 	public ResponseEntity<Object> GETFilter(@RequestBody JSONObject body){
+		ListsCreate.Lists.getToPushList().clear();
+		ListsCreate.Lists.ListCopy(ListsCreate.Lists.getMList(),ListsCreate.Lists.getToPushList());
 		ServiceImpl.GETFilter(body);
-		return null;
+		return new ResponseEntity<Object>(ServiceImpl.GETDataFiltered(), HttpStatus.OK);
 
 	}
 	

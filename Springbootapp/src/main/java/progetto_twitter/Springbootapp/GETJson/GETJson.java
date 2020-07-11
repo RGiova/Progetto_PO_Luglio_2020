@@ -14,7 +14,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 public class GETJson {
-	public static JSONArray GETJ() {
+	public static void GETJ() {
 		JSONArray obj = null;
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/statuses/user_timeline.json?user_id=2890854922&tweet_mode=extended&count=200";
 		try {
@@ -43,6 +43,5 @@ public class GETJson {
 			e.printStackTrace();
 		}
 		JSONParse.ParseText(obj);
-		return obj;
 	}
 }
