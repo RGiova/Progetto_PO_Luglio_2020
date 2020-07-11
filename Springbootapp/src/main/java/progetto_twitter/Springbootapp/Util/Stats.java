@@ -146,8 +146,8 @@ public class Stats {
 				if(ImgObj.get(pics).getW()< minW) minW = Img.get(pics).getW();
 				AvgW += ImgObj.get(pics).getW();
 				SDW = SD((double)Img.get(pics).getW());
-				if(ImgObj.get(pics).getW()> MAXH) MAXH = Img.get(pics).getH();
-				if(ImgObj.get(pics).getW()< minH) minH = Img.get(pics).getH();
+				if(ImgObj.get(pics).getH()> MAXH) MAXH = Img.get(pics).getH();
+				if(ImgObj.get(pics).getH()< minH) minH = Img.get(pics).getH();
 				AvgH += ImgObj.get(pics).getH();
 				SDH = SD((double)Img.get(pics).getH());
 				if(ImgObj.get(pics).getD()> MAXD) MAXD = Img.get(pics).getD();
