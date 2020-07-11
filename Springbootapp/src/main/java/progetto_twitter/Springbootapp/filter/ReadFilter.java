@@ -87,8 +87,9 @@ public class ReadFilter extends FilterModel {
 				if (Aoperators[j].equals("$bt")||Aoperators[j].equals("$in")||Aoperators[j].equals("$nin")) {
 					btArray = new ArrayList<String>();
 					btArray = (ArrayList<String>) ((HashMap<String,?>) Object).get(Aoperators[j]);
-					AddValue(btArray.get(0));
-					AddValue(btArray.get(1));
+					Iterator<String> i = btArray.iterator();
+					while(i.hasNext())
+					AddValue((String) i.next());
 				}
 				else
 				AddValue((String) ((HashMap<String, ?>) Object).get(Aoperators[j]));
