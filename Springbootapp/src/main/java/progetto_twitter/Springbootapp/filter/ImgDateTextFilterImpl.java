@@ -8,19 +8,31 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
+import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
+import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.model.ImageModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.util.GetMethods;
+import progetto_twitter.Springbootapp.util.ModifyDate;
+
 import java.util.Date;
 
 public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 
-	public boolean FilteringofText(String value, JSONModel obj, String operator, ArrayList<String> values) {
+	public boolean FilteringofText(String value, JSONModel obj, String operator, ArrayList<String> values)
+			throws WrongValueException {
 		int length;
+		int length1 = 0;
+		int length2 = 0;
 		try {
 			length = Integer.parseInt(value);
+			if (values.size() == 2) {
+				length1 = Integer.parseInt(values.get(0));
+				length2 = Integer.parseInt(values.get(1));
+			}
 		} catch (NumberFormatException e) {
-			length = 0;
+			throw new WrongValueException("after ( \"text\": )");
+
 		}
 		if (operator.equals("not") && (obj.getText().length()) == (length))
 			return true;
@@ -39,8 +51,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			return true;
 		else if ((operator.equals("$lte") && (obj.getText().length()) > (length)))
 			return true;
-		else if (operator.equals("$bt") && ((obj.getText().length()) < Integer.parseInt(values.get(0))
-				|| (obj.getText().length()) > Integer.parseInt(values.get(1))))
+		else if (operator.equals("$bt") && ((obj.getText().length()) < length1) || (obj.getText().length()) > length2)
 			return true;
 		else
 			return false;
@@ -48,16 +59,21 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 	}
 
 	public boolean FilteringofImages(String fields, JSONModel obj, String value, String operator,
-			ArrayList<String> values) {
+			ArrayList<String> values) throws WrongValueException {
 		if (obj.getImg() == null) {
-			obj.setTo_insert(false);
 			return true;
 		}
 		Long length;
+		int length1 = 0;
+		int length2 = 0;
 		try {
 			length = Long.parseLong(value);
+			if (values.size() == 2) {
+				length1 = Integer.parseInt(values.get(0));
+				length2 = Integer.parseInt(values.get(1));
+			}
 		} catch (NumberFormatException e) {
-			length = (long) 0;
+			throw new WrongValueException("after \"w\" or \"h\" or \"dimension\"");
 		}
 		Vector<ImageModel> ClassImg = obj.getImg();
 		Iterator<ImageModel> k = ClassImg.iterator();
@@ -81,15 +97,16 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 				return true;
 			else if (operator.equals("$lte") && field > length)
 				return true;
-			else if (operator.equals("$bt")
-					&& (field < Integer.parseInt(values.get(0)) || field > Integer.parseInt(values.get(1))))
+			else if ((operator.equals("$bt")) && (field < length1 || field > length2))
 				return true;
+			else
+				return false;
 		}
-		return false;
-
+		return true;
 	}
 
-	public boolean FilteringofDate(JSONModel obj, String value, String operator, ArrayList<String> values) {
+	public boolean FilteringofDate(JSONModel obj, String value, String operator, ArrayList<String> values)
+			throws WrongDateFormatException {
 		if ((operator.equals("not") && obj.getDate().equals(value)))
 			return true;
 		else if (operator.equals("$in") || operator.equals("nin")) {
@@ -120,7 +137,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 		boolean compare(int a, int b);
 	}
 
-	public static boolean Compare(JSONModel obj, String Op, String value) {
+	public static boolean Compare(JSONModel obj, String Op, String value) throws WrongDateFormatException {
 		boolean bool = false;
 		Map<String, Operator> opMap = new HashMap<String, Operator>();
 		opMap.put(">", new Operator() {
@@ -162,13 +179,12 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			ValueDate = sdformat.parse(SplitValue[2] + "-" + SplitValue[1] + "-" + SplitValue[0]);
 			ObjDate = sdformat.parse(SplitDate[2] + "-" + SplitDate[1] + "-" + SplitDate[0]);
 		} catch (ParseException e) {
-			ValueDate = null;
-			ObjDate = null; // ECCEZZIONIIII
-			e.printStackTrace();
+			throw new WrongDateFormatException();
 		}
 
 		bool = opMap.get(Op).compare(ObjDate.compareTo(ValueDate), 0);
 		return bool;
 
 	}
+
 }

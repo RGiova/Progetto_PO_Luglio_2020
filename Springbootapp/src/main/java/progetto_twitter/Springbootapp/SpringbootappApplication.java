@@ -8,7 +8,7 @@ import progetto_twitter.Springbootapp.util.ListManagementImpl;
 import progetto_twitter.Springbootapp.util.ListsCreate;
 
 @SpringBootApplication
-public class SpringbootappApplication{
+public class SpringbootappApplication {
 
 	public static void main(String[] args) {
 		ListsCreate.ListsInitiate();
