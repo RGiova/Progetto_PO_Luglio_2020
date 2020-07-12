@@ -8,7 +8,6 @@ public class GetMethods {
 		Method m = null;
 		Object object = null;
 		try {
-			System.out.println("get" + Name.substring(0, 1).toUpperCase() + Name.substring(1));
 			m = Class.getClass().getMethod("get" + Name.substring(0, 1).toUpperCase() + Name.substring(1));
 			object = m.invoke(Class);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
