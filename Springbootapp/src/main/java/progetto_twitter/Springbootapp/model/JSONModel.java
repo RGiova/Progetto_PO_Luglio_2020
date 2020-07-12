@@ -1,12 +1,13 @@
 package progetto_twitter.Springbootapp.model;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class JSONModel {
 private long post_id;
 private String date;
 private String text;
-private Vector<String> hashtags;
+private ArrayList<String> hashtags;
 private Vector<String> Url;
 private Vector<ImageModel> Img;
 private String name;
@@ -31,10 +32,10 @@ public String getText() {
 public void setText(String text) {
 	this.text = text;
 }
-public Vector<String> getHashtags() {
+public ArrayList<String> getHashtags() {
 	return hashtags;
 }
-public void setHashtags(Vector<String> hashtags) {
+public void setHashtags(ArrayList<String> hashtags) {
 	this.hashtags = hashtags;
 }
 public Vector<String> getURL() {
