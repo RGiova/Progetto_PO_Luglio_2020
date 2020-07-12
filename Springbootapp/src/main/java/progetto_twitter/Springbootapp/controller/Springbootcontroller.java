@@ -40,7 +40,11 @@ public class Springbootcontroller {
 		ListsCreate.Lists.ListCopy(ListsCreate.Lists.getMList(), ListsCreate.Lists.getToPushList());
 		ServiceImpl.GETFilter(body);
 		return new ResponseEntity<Object>(ServiceImpl.GETDataFiltered(), HttpStatus.OK);
-
+	}
+	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat ){
+		ServiceImpl.GETStatistics(Stat);
+		return null;
+		
 	}
 
 }

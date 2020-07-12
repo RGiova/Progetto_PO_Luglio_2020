@@ -46,4 +46,13 @@ public class ServiceImpl {
 			ListsCreate.Lists.getToFilterList2().clear();
 		return ListsCreate.Lists.getToPushList();
 	}
+
+	public static void GETStatistics(String stat) {
+		if(stat.equals("giorno")||stat.equals("mese")||stat.equals("anno")||stat.equals("url")||stat.equals("hashtags")||stat.equals("text") || stat.equals("Image")) {
+			//far partire le statistiche
+		}
+		else
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
+		
+	}
 }

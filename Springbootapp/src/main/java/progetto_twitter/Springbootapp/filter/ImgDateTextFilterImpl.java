@@ -34,7 +34,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			throw new WrongValueException("after ( \"text\": )");
 
 		}
-		if (operator.equals("not") && (obj.getText().length()) == (length))
+		if (operator.equals("$not") && (obj.getText().length()) == (length))
 			return true;
 		else if ((operator.equals("$in") || operator.equals("nin"))) {
 			if (operator.equals("$in") && !values.contains(String.valueOf(obj.getText().length())))
@@ -80,7 +80,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 		while (k.hasNext()) {
 			Object imgObject = (Object) k.next();
 			Long field = GetMethods.SearchMethod(fields, imgObject);
-			if (operator.equals("not") && field.equals(value))
+			if (operator.equals("$not") && field.equals(value))
 				return true;
 			else if (operator.equals("$in") || operator.equals("nin")) {
 				if (operator.equals("$in") && !values.contains(String.valueOf(field)))
@@ -107,7 +107,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 
 	public boolean FilteringofDate(JSONModel obj, String value, String operator, ArrayList<String> values)
 			throws WrongDateFormatException {
-		if ((operator.equals("not") && obj.getDate().equals(value)))
+		if ((operator.equals("$not")) && (obj.getDate().equals(value)))
 			return true;
 		else if (operator.equals("$in") || operator.equals("nin")) {
 			if (operator.equals("$in") && !values.contains(obj.getDate()))

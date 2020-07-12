@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
 public class ReadFilter extends FilterModel {
 	private String fields = "date,text,w,h,dimension";
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
-	private Object Object = new Object();
+	private HashMap<String,?> Object = new HashMap<>();
 	private int contatore;
 	private ArrayList<Object> Array = new ArrayList<Object>();
 	private String[] logicalOperators;
@@ -83,7 +83,7 @@ public class ReadFilter extends FilterModel {
 		try {
 			while (i < Afields.length) {
 				if (((HashMap<String, ?>) obj).containsKey(Afields[i])) {
-					Object = ((HashMap<String, ?>) obj).get(Afields[i]);
+					Object = (HashMap<String, ?>) ((HashMap<String, ?>) obj).get(Afields[i]);
 					k = i;
 				}
 				i++;
@@ -103,7 +103,7 @@ public class ReadFilter extends FilterModel {
 		int j = 0;
 		int k = -1;
 		while (j < Aoperators.length) {
-			if (((HashMap<String, ?>) Object).containsKey(Aoperators[j])) {// aggiungere eccezione
+			if (Object.containsKey(Aoperators[j])) {// aggiungere eccezione
 				getValues().clear();
 				try {
 					if (Aoperators[j].equals("$bt") || Aoperators[j].equals("$in") || Aoperators[j].equals("$nin")) {

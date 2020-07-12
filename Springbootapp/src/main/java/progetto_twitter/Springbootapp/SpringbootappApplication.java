@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import progetto_twitter.Springbootapp.GETJson.GETJson;
-import progetto_twitter.Springbootapp.util.ListManagementImpl;
 import progetto_twitter.Springbootapp.util.ListsCreate;
 
 @SpringBootApplication
