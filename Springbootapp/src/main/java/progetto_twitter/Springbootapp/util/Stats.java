@@ -9,7 +9,7 @@ import progetto_twitter.Springbootapp.model.WordModel;
 
 
 public interface Stats {
-	public  ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp);
+	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp);
 	public ArrayList<WordModel> WordStats(ArrayList<JSONModel> objp);
 	public ArrayList<WordModel> getTopN(ArrayList<WordModel> WordList, int N);
 	public String IMGminAvgMAX(ArrayList<JSONModel> objp);
