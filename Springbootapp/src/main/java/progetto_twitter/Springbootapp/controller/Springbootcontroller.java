@@ -1,6 +1,6 @@
 package progetto_twitter.Springbootapp.controller;
 
-import java.util.Collections;
+
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,30 +8,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import progetto_twitter.Springbootapp.GETJson.GETJson;
-import progetto_twitter.Springbootapp.GETJson.JSONParse;
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
 import progetto_twitter.Springbootapp.exceptions.WrongOperatorException;
 import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
-import progetto_twitter.Springbootapp.filter.ReadFilter;
-import progetto_twitter.Springbootapp.model.*;
 import progetto_twitter.Springbootapp.service.ServiceImpl;
 import progetto_twitter.Springbootapp.util.ListsCreate;
-import progetto_twitter.Springbootapp.util.Metadata;
+import progetto_twitter.Springbootapp.util.StatsImpl;
+
 
 @RestController
 public class Springbootcontroller {
+	private ServiceImpl Service = new ServiceImpl();
 	@GetMapping("/metadata")
 	public ResponseEntity<Object> GETMetaData() {
-		return new ResponseEntity<Object>(ServiceImpl.GETMetaData(), HttpStatus.OK);
+		return new ResponseEntity<Object>(Service.GETMetaData(), HttpStatus.OK);
 	}
 
 	@GetMapping("/data")
 	public ResponseEntity<Object> GETData() {
-		return new ResponseEntity<Object>(ServiceImpl.GETData(), HttpStatus.OK);
+		return new ResponseEntity<Object>(Service.GETData(), HttpStatus.OK);
 	}
 
 	@PostMapping("/filter")
@@ -39,13 +37,21 @@ public class Springbootcontroller {
 			WrongFormatExceptions, WrongFieldException, WrongValueException, WrongDateFormatException {
 		ListsCreate.Lists.getToPushList().clear();
 		ListsCreate.Lists.ListCopy(ListsCreate.Lists.getMList(), ListsCreate.Lists.getToPushList());
-		ServiceImpl.GETFilter(body);
-		return new ResponseEntity<Object>(ServiceImpl.GETDataFiltered(), HttpStatus.OK);
+		Service.GETFilter(body);
+		return new ResponseEntity<Object>(Service.GETDataFiltered(), HttpStatus.OK);
 	}
-	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat, @RequestParam(defaultValue = "0") String N ) throws WrongStatisticException{
-		ServiceImpl.GETStatistics(Stat,N);
-		return null;
-		
+	@GetMapping("/statistics")
+	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat)
+			throws WrongStatisticException {
+		return new ResponseEntity<Object>(Service.GETStatistics(Stat), HttpStatus.OK);
+	}
+	@GetMapping("/wordlist")
+	public ResponseEntity<Object> GETWordlist(@RequestParam(defaultValue = "0") String N){
+		return new ResponseEntity<Object>(Service.GETWordList(N), HttpStatus.OK);
+	}
+	@GetMapping("/hashlist")
+	public ResponseEntity<Object> GETHashlist(){
+		return new ResponseEntity<Object>(Service.GETHashList(), HttpStatus.OK);
 	}
 
 }

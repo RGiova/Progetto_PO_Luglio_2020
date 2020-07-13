@@ -17,7 +17,7 @@ import progetto_twitter.Springbootapp.model.WordModel;
 public class StatsImpl implements Stats {
 
 	@Override
-	public  ArrayList<HashModel> HashStats(Arraylist<JSONModel> objp){
+	public  ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp){
 		Iterator<?> t = objp.iterator();
 		ArrayList<HashModel> HashList = new ArrayList<HashModel>(objp.size());
 		 while(t.hasNext()) {

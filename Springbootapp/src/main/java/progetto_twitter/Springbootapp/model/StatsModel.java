@@ -8,6 +8,16 @@ private long average;
 private long StdDeviation;
 
 
+public StatsModel(String name, int min, int max, long average, long stdDeviation) {
+	super();
+	Name = name;
+	this.min = min;
+	this.max = max;
+	this.average = average;
+	StdDeviation = stdDeviation;
+}
+
+
 public int getMin() {
 	return min;
 }

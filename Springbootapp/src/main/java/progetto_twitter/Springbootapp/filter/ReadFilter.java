@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
 public class ReadFilter extends FilterModel {
 	private String fields = "date,text,w,h,dimension";
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
-	private HashMap<String,?> Object = new HashMap<>();
+	private HashMap<String, ?> Object = new HashMap<>();
 	private int contatore;
 	private ArrayList<Object> Array = new ArrayList<Object>();
 	private String[] logicalOperators;
@@ -127,7 +127,7 @@ public class ReadFilter extends FilterModel {
 		}
 		if (k == -1)
 			throw new WrongOperatorException("Wrong operator");
-		if(Aoperators[k].equals("$bt") && getValues().size()>2)
+		if (Aoperators[k].equals("$bt") && getValues().size() > 2)
 			throw new WrongFormatExceptions();
 		setOperator(Aoperators[k]);
 		if (getField().equals("date")) {
