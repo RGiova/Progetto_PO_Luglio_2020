@@ -67,7 +67,7 @@ public class ServiceImpl implements Service {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
 
 	}
-	public ArrayList<WordModel> GETWordList(String N){
+	public ArrayList<WordModel> GETWordList(String N) throws NumberFormatException{
 		int n;
 		try {
 			n = Integer.parseInt(N);

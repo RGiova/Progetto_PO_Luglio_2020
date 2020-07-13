@@ -4,11 +4,11 @@ public class StatsModel {
 private String Name;
 private int min;
 private int max;
-private long average;
-private long StdDeviation;
+private double average;
+private double StdDeviation;
 
 
-public StatsModel(String name, int min, int max, long average, long stdDeviation) {
+public StatsModel(String name, int min, int max, double average, double stdDeviation) {
 	super();
 	Name = name;
 	this.min = min;
@@ -30,16 +30,16 @@ public int getMax() {
 public void setMax(int max) {
 	this.max = max;
 }
-public long getAverage() {
+public double getAverage() {
 	return average;
 }
-public void setAverage(long average) {
+public void setAverage(double average) {
 	this.average = average;
 }
-public long getStdDeviation() {
+public double getStdDeviation() {
 	return StdDeviation;
 }
-public void setStdDeviation(long stdDeviation) {
+public void setStdDeviation(double stdDeviation) {
 	StdDeviation = stdDeviation;
 }
 public String getName() {
