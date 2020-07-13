@@ -14,6 +14,7 @@ import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
 import progetto_twitter.Springbootapp.exceptions.WrongOperatorException;
+import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.filter.ReadFilter;
 import progetto_twitter.Springbootapp.model.*;
@@ -41,8 +42,8 @@ public class Springbootcontroller {
 		ServiceImpl.GETFilter(body);
 		return new ResponseEntity<Object>(ServiceImpl.GETDataFiltered(), HttpStatus.OK);
 	}
-	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat ){
-		ServiceImpl.GETStatistics(Stat);
+	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat, @RequestParam(defaultValue = "0") String N ) throws WrongStatisticException{
+		ServiceImpl.GETStatistics(Stat,N);
 		return null;
 		
 	}

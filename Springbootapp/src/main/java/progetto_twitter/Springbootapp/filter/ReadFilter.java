@@ -99,7 +99,7 @@ public class ReadFilter extends FilterModel {
 
 	@SuppressWarnings("unchecked")
 	public void Filter(String[] Aoperators, String LogicalOperator)
-			throws WrongOperatorException, WrongValueException, WrongDateFormatException {
+			throws WrongOperatorException, WrongValueException, WrongDateFormatException, WrongFormatExceptions {
 		int j = 0;
 		int k = -1;
 		while (j < Aoperators.length) {
@@ -127,6 +127,8 @@ public class ReadFilter extends FilterModel {
 		}
 		if (k == -1)
 			throw new WrongOperatorException("Wrong operator");
+		if(Aoperators[k].equals("$bt") && getValues().size()>2)
+			throw new WrongFormatExceptions();
 		setOperator(Aoperators[k]);
 		if (getField().equals("date")) {
 			Iterator i = getValues().iterator();

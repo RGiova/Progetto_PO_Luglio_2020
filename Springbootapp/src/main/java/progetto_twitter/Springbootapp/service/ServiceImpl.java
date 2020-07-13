@@ -10,12 +10,12 @@ import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
 import progetto_twitter.Springbootapp.exceptions.WrongOperatorException;
+import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.filter.ReadFilter;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
 import progetto_twitter.Springbootapp.util.*;
-import progetto_twitter.Springbootapp.util.Metadata;
 
 public class ServiceImpl {
 
@@ -47,9 +47,9 @@ public class ServiceImpl {
 		return ListsCreate.Lists.getToPushList();
 	}
 
-	public static void GETStatistics(String stat) {
-		if(stat.equals("giorno")||stat.equals("mese")||stat.equals("anno")||stat.equals("url")||stat.equals("hashtags")||stat.equals("text") || stat.equals("Image")) {
-			//far partire le statistiche
+	public static void GETStatistics(String stat, String N) throws WrongStatisticException {
+		if(stat.equals("day")||stat.equals("month")||stat.equals("year")||stat.equals("url")||stat.equals("hashtags")||stat.equals("text") || stat.equals("image")) {
+			Choise.Stats(stat, N);
 		}
 		else
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");

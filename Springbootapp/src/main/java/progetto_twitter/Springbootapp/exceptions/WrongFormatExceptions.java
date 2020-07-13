@@ -8,5 +8,8 @@ public WrongFormatExceptions(String operator) {
 public WrongFormatExceptions(String field, int N) {
 	super("After "+field+" field braces (  :{}  )are expected");
 }
+public WrongFormatExceptions() {
+	super("After $bt operator only two elements are expected");
+}
 
 }
