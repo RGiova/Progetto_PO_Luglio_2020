@@ -32,27 +32,29 @@ public class StatsImpl implements Stats {
 			/* Scorro HashList per constatare se l'hashtag è già stata utilizzata o meno */
 
 			for (int j = 0; j < hash.size(); j++) {
-				for (int i = 0; i < HashList.size(); i++) {
-					if (HashList.get(i).getText().equals(hash.get(j))) {
-						index = i;
-						found = true;
-						break;
+				if (HashList.size() > 0) {
+					for (int i = 0; i < HashList.size() && !found; i++) {
+						if (HashList.get(i).getText().equals(hash.get(j))) {
+							index = i;
+							found = true;
+						}
 					}
+
+					if (found) {
+						HashList.get(index).setOccorrenze(HashList.get(index).getOccorrenze() + 1);
+						found=false;
+					} else {
+						HashModel NewHash = new HashModel(hash.get(j));
+						HashList.add(NewHash);
+					}
+				} else {
+					HashModel NewHash = new HashModel(hash.get(j));
+					HashList.add(NewHash);
 				}
 			}
 
-			/*
-			 * Incremento Occorrenze dell'Hashtag se questa è già in lista, altrimenti la
-			 * inserisco
-			 */
-
-			if (found) {
-				HashList.get(index).setOccorrenze(HashList.get(index).getOccorrenze() + 1);
-			} else {
-				HashModel NewHash = new HashModel(hash.get(index));
-				HashList.add(NewHash);
-			}
 		}
+
 		return HashList;
 
 	}
@@ -62,6 +64,8 @@ public class StatsImpl implements Stats {
 
 		Iterator<?> t = objp.iterator();
 		ArrayList<WordModel> WordList = new ArrayList<WordModel>();
+		ArrayList<WordModel> App = new ArrayList<WordModel>();
+		boolean found = false;
 		while (t.hasNext()) {
 			JSONModel p1 = new JSONModel();
 			p1 = (JSONModel) t.next();
@@ -78,29 +82,28 @@ public class StatsImpl implements Stats {
 
 				/* Controllo la parola per ignorare URL */
 
-				if (Word.length() > 4 && Word.substring(0, 4).equals("http"))
-					break;
-
+				if (!(Word.length() > 4 && Word.substring(0, 4).equals("http") || Word.length() == 0))
+				{
 				/* Scorro WordList per constatare se la parola è già stata utilizzata o meno */
 				if (WordList.size() > 0) {
-					for (int i = 0; i < WordList.size(); i++) {
+					for (int i = 0; i < WordList.size() && !found; i++) {
 						if (WordList.get(i).getText().equals(Word)) {
 							index = i;
-							WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
-							break;
+							found = true;
 						}
-
 
 						/*
 						 * Incremento Occorrenze della parola se questa è già in lista, altrimenti la
 						 * inserisco
 						 */
-						else {
-							int length = Word.length();
-							WordModel NewWord = new WordModel(Word, length);
-							WordList.add(NewWord);
-						}
-
+					}
+					if (found) {
+						WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
+						found=false;
+					} else {
+						int length = Word.length();
+						WordModel NewWord = new WordModel(Word, length);
+						WordList.add(NewWord);
 					}
 
 				} else {
@@ -109,6 +112,7 @@ public class StatsImpl implements Stats {
 					WordList.add(NewWord);
 				}
 
+			}
 			}
 
 		}
@@ -137,24 +141,26 @@ public class StatsImpl implements Stats {
 	public ArrayList<StatsModel> IMGminAvgMAX(ArrayList<JSONModel> objp) {
 		long minW = 10000;
 		long MAXW = 0;
-		long AvgW = 0;
+		double AvgW = 0;
 		StandardDeviation sd1 = new StandardDeviation();
 		double SDW = 0;
 		long minH = 10000;
 		long MAXH = 0;
-		long AvgH = 0;
+		double AvgH = 0;
 		StandardDeviation sd2 = new StandardDeviation();
 		double SDH = 0;
 		long minD = 10000;
 		long MAXD = 0;
-		long AvgD = 0;
+		double AvgD = 0;
 		StandardDeviation sd3 = new StandardDeviation();
 		double SDD = 0;
-		int index = 0;
-		int pics = 0;
+		double index = 0;
+		double pics = 0;
 		Iterator<?> t = objp.iterator();
 		while (t.hasNext()) {
 			JSONModel ImgObj = (JSONModel) t.next();
+			if(ImgObj.getImg()!=null)
+			{
 			Iterator<?> i = ImgObj.getImg().iterator();
 			while (i.hasNext()) {
 				ImageModel Img = (ImageModel) i.next();
@@ -179,6 +185,8 @@ public class StatsImpl implements Stats {
 				pics++;
 			}
 			index += pics;
+			pics = 0;
+		}
 		}
 		ArrayList<StatsModel> IMGStats = new ArrayList<StatsModel>();
 		StatsModel WStats = new StatsModel("Width", (int) minW, (int) MAXW, AvgW / index, SDW);
@@ -218,7 +226,7 @@ public class StatsImpl implements Stats {
 		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
 		int minDay = 10000;
 		int MAXDay = 0;
-		int AvgDay = 0;
+		double AvgDay = 0;
 		StandardDeviation sd1 = new StandardDeviation();
 		double SDDay = 0;
 		int minMon = 10000;
@@ -238,22 +246,24 @@ public class StatsImpl implements Stats {
 		int MonTweetCount = 0;
 		int YrTweetCount = 0;
 		Iterator<?> t = objp.iterator();
+		Date lastDate = null;
 		while (t.hasNext()) {
 			JSONModel DateObj = (JSONModel) t.next();
 			String[] SplitDate = DateObj.getDate().split("/");
 			Date thisDate = null;
-			Date lastDate = null;
 			try {
 				thisDate = sdformat.parse(SplitDate[2] + "-" + SplitDate[1] + "-" + SplitDate[0]);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			if (DayTotal == 0)
+			if (DayTweetCount==0)
 				lastDate = thisDate;
 			if (thisDate.getYear() == lastDate.getYear()) {
 				if (thisDate.getMonth() == lastDate.getMonth()) {
-					if (thisDate.getDate() == lastDate.getDate())
+					System.out.println(thisDate.getMonth()+"  "+lastDate.getMonth());
+					if (thisDate.getDate() == lastDate.getDate()) {
 						DayTweetCount++;
+					}
 					else {
 						if (DayTweetCount < minDay)
 							minDay = DayTweetCount;
@@ -261,7 +271,7 @@ public class StatsImpl implements Stats {
 							MAXDay = DayTweetCount;
 						AvgDay += DayTweetCount;
 						SDDay = sd1.SD(DayTweetCount);
-						DayTotal += thisDate.getDate() - lastDate.getDate();
+						DayTotal += lastDate.getDate() - thisDate.getDate();
 						lastDate = thisDate;
 						MonTweetCount += DayTweetCount;
 						DayTweetCount = 1;
@@ -277,7 +287,8 @@ public class StatsImpl implements Stats {
 					SDMon = sd2.SD(MonTweetCount);
 					YrTweetCount += MonTweetCount;
 					MonTweetCount = 1;
-					DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(), lastDate.getDate());
+					DayTotal += lastDate.getDay() + MissingDays(thisDate.getMonth(), thisDate.getDate());
+					lastDate = thisDate;
 					MonTotal++;
 				}
 
@@ -289,19 +300,20 @@ public class StatsImpl implements Stats {
 				AvgYr += YrTweetCount;
 				SDYr = sd3.SD(YrTweetCount);
 				YrTweetCount = 1;
-				DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(), lastDate.getDate());
+				DayTotal += lastDate.getDay() + MissingDays(thisDate.getMonth(), thisDate.getDate());
+				lastDate = thisDate;
 				YrTotal++;
 
 			}
 
 		}
 		ArrayList<StatsModel> DateStats = new ArrayList<StatsModel>();
-		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, AvgDay / DayTotal, SDDay);
+		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, AvgDay / (double)DayTotal, SDDay);
 		StatsModel MonStats = new StatsModel("Tweets per Month", minMon, MAXMon, AvgMon / MonTotal, SDMon);
-		StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, AvgYr / YrTotal, SDYr);
+		//StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, AvgYr / YrTotal, SDYr);
 		DateStats.add(DayStats);
 		DateStats.add(MonStats);
-		DateStats.add(YrStats);
+		//DateStats.add(YrStats);
 		return DateStats;
 	}
 

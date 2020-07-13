@@ -16,7 +16,9 @@ import org.json.simple.parser.ParseException;
 public class GETJson {
 	public static void GETJ() {
 		JSONArray obj = null;
-		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/statuses/user_timeline.json?user_id=2890854922&tweet_mode=extended&count=200";
+		for (int i = 1; i<6;i++) {
+			String x = String.valueOf(i);
+		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/statuses/user_timeline.json?user_id=2890854922&tweet_mode=extended&count=200&page=x";
 		try {
 
 			URLConnection openConnection = new URL(url).openConnection();
@@ -43,5 +45,6 @@ public class GETJson {
 			e.printStackTrace();
 		}
 		JSONParse.ParseText(obj);
+	}
 	}
 }
