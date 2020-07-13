@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import progetto_twitter.Springbootapp.model.StandardDeviation;
 import progetto_twitter.Springbootapp.model.StatsModel;
@@ -71,41 +72,45 @@ public class StatsImpl implements Stats {
 			 */
 
 			String Phrase = p1.getText().replaceAll("[^\\p{L}\\p{Z}]", "");
-			ArrayList<String> Words = (ArrayList<String>) Arrays.asList(Phrase.split("\s"));
+			List<String> Words = new ArrayList<String>(Arrays.asList(Phrase.split("\s")));
 			boolean found = false;
 			int index = 0;
 			for (int j = 0; j < Words.size(); j++) {
 				String Word = Words.get(j).toLowerCase();
 
-				/* Controllo la parola per ignorare Tag, Hashtag e URL */
+				/* Controllo la parola per ignorare URL */
 
-				if (Word.charAt(0) == '#' || Word.charAt(0) == '@')
-					break;
-				if (Word.substring(0, 4).equals("http"))
+				if (Word.length() > 4 && Word.substring(0, 4).equals("http"))
 					break;
 
 				/* Scorro WordList per constatare se la parola è già stata utilizzata o meno */
+				if (WordList.size() > 0) {
+					for (int i = 0; i < WordList.size(); i++) {
+						if (WordList.get(i).getText().equals(Word)) {
+							index = i;
+							found = true;
+							break;
+						}
 
-				for (int i = 0; i < WordList.size(); i++) {
-					if (WordList.get(i).getText().equals(Word)) {
-						index = i;
-						found = true;
-						break;
+						/*
+						 * Incremento Occorrenze della parola se questa è già in lista, altrimenti la
+						 * inserisco
+						 */
+
+						if (found) {
+							WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
+						} else {
+							Integer length = Words.get(j).length();
+							WordModel NewWord = new WordModel(Words.get(index), length);
+							WordList.add(NewWord);
+						}
+
 					}
 
-					/*
-					 * Incremento Occorrenze della parola se questa è già in lista, altrimenti la
-					 * inserisco
-					 */
-
-					if (found) {
-						WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
-					} else {
-						Integer length = Words.get(j).length();
-						WordModel NewWord = new WordModel(Words.get(index), length);
-						WordList.add(NewWord);
-					}
-
+				} else {
+					Integer length = Words.get(j).length();
+					WordModel NewWord = new WordModel(Words.get(index), length);
+					WordList.add(NewWord);
 				}
 
 			}
@@ -179,13 +184,13 @@ public class StatsImpl implements Stats {
 			}
 			index += pics;
 		}
-		ArrayList<StatsModel> IMGStats= new ArrayList<StatsModel>;
-		StatsModel WStats = new StatsModel("Width", minW, MAXW, AvgW, SDW);
-		StatsModel HStats = new StatsModel("Height", minH, MAXH, AvgH, SDH);
-		StatsModel DStats = new StatsModel("Dimension", minD, MAXD, AvgD, SDD);
+		ArrayList<StatsModel> IMGStats = new ArrayList<StatsModel>();
+		StatsModel WStats = new StatsModel("Width", (int) minW, (int) MAXW, AvgW / index, SDW);
+		StatsModel HStats = new StatsModel("Height", (int) minH, (int) MAXH, AvgH / index, SDH);
+		StatsModel DStats = new StatsModel("Dimension", (int) minD, (int) MAXD, AvgD / index, SDD);
 		IMGStats.add(WStats);
-		IMGStats.add(WStats);
-		IMGStats.add(WStats);
+		IMGStats.add(HStats);
+		IMGStats.add(DStats);
 		return IMGStats;
 	}
 
@@ -205,8 +210,8 @@ public class StatsImpl implements Stats {
 			SD = sd.SD(urls);
 			index += urls;
 		}
-		ArrayList<StatsModel> URLS= new ArrayList<StatsModel>;
-		StatsModel appoggio = new StatsModel("URL",min,MAX,Avg,null);
+		ArrayList<StatsModel> URLS = new ArrayList<StatsModel>();
+		StatsModel appoggio = new StatsModel("URL", min, MAX, Avg / index, SD);
 		URLS.add(appoggio);
 		return URLS;
 	}
@@ -247,53 +252,60 @@ public class StatsImpl implements Stats {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			if (DayTotal==0) lastDate = thisDate;
+			if (DayTotal == 0)
+				lastDate = thisDate;
 			if (thisDate.getYear() == lastDate.getYear()) {
 				if (thisDate.getMonth() == lastDate.getMonth()) {
 					if (thisDate.getDate() == lastDate.getDate())
 						DayTweetCount++;
 					else {
-						 if(DayTweetCount < minDay) minDay = DayTweetCount;
-						 if(DayTweetCount > MAXDay) MAXDay = DayTweetCount;
-						 AvgDay += DayTweetCount;
-						 SDDay = sd1.SD(DayTweetCount);
+						if (DayTweetCount < minDay)
+							minDay = DayTweetCount;
+						if (DayTweetCount > MAXDay)
+							MAXDay = DayTweetCount;
+						AvgDay += DayTweetCount;
+						SDDay = sd1.SD(DayTweetCount);
 						DayTotal += thisDate.getDate() - lastDate.getDate();
 						lastDate = thisDate;
 						MonTweetCount += DayTweetCount;
 						DayTweetCount = 1;
-						
+
 					}
 
 				} else {
-					 if(MonTweetCount < minMon) minMon = MonTweetCount;
-					 if(MonTweetCount > MAXMon) MAXMon = MonTweetCount;
-					 AvgMon += MonTweetCount;
-					 SDMon = sd2.SD(MonTweetCount);
+					if (MonTweetCount < minMon)
+						minMon = MonTweetCount;
+					if (MonTweetCount > MAXMon)
+						MAXMon = MonTweetCount;
+					AvgMon += MonTweetCount;
+					SDMon = sd2.SD(MonTweetCount);
 					YrTweetCount += MonTweetCount;
 					MonTweetCount = 1;
-					DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(),lastDate.getDate());
-					MonTotal ++;
+					DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(), lastDate.getDate());
+					MonTotal++;
 				}
 
 			} else {
-				 if(YrTweetCount < minYr) minDay = YrTweetCount;
-				 if(YrTweetCount > MAXYr) MAXDay = YrTweetCount;
-				 AvgYr += YrTweetCount;
+				if (YrTweetCount < minYr)
+					minDay = YrTweetCount;
+				if (YrTweetCount > MAXYr)
+					MAXDay = YrTweetCount;
+				AvgYr += YrTweetCount;
 				SDYr = sd3.SD(YrTweetCount);
 				YrTweetCount = 1;
-				DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(),lastDate.getDate());
+				DayTotal += thisDate.getDay() + MissingDays(lastDate.getMonth(), lastDate.getDate());
 				YrTotal++;
 
 			}
 
 		}
-		ArrayList<StatsModel> DateStats= new ArrayList<StatsModel>;
-		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, AvgDay, SDDay);
-		StatsModel MonStats = new StatsModel("Tweets per Month", minMon, MAXMon, AvgMon, SDMon);
-		StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, AvgYr, SDYr);
-		IMGStats.add(DayStats);
-		IMGStats.add(MonStats);
-		IMGStats.add(YrStats);
+		ArrayList<StatsModel> DateStats = new ArrayList<StatsModel>();
+		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, AvgDay / DayTotal, SDDay);
+		StatsModel MonStats = new StatsModel("Tweets per Month", minMon, MAXMon, AvgMon / MonTotal, SDMon);
+		StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, AvgYr / YrTotal, SDYr);
+		DateStats.add(DayStats);
+		DateStats.add(MonStats);
+		DateStats.add(YrStats);
 		return DateStats;
 	}
 
@@ -311,8 +323,8 @@ public class StatsImpl implements Stats {
 				min = HashList.get(index).getOccorrenze();
 			Avg += HashList.get(index).getOccorrenze();
 		}
-		ArrayList<StatsModel> HashS= new ArrayList<StatsModel>;
-		StatsModel appoggio = new StatsModel("Hashtag",min,MAX,Avg,null);
+		ArrayList<StatsModel> HashS = new ArrayList<StatsModel>();
+		StatsModel appoggio = new StatsModel("Hashtag", min, MAX, Avg, 0);
 		HashS.add(appoggio);
 		return HashS;
 
@@ -332,18 +344,17 @@ public class StatsImpl implements Stats {
 				min = WordList.get(index).getOccorrenze();
 			Avg += WordList.get(index).getOccorrenze();
 		}
-		ArrayList<StatsModel> WordS= new ArrayList<StatsModel>;
-		StatsModel appoggio = new StatsModel("Words",min,MAX,Avg,null);
+		ArrayList<StatsModel> WordS = new ArrayList<StatsModel>();
+		StatsModel appoggio = new StatsModel("Words", min, MAX, Avg, 0);
 		WordS.add(appoggio);
 		return WordS;
 	}
 
 	public int MissingDays(int Month, int Day) {
 
-		if ((Month==0 || Month==2 || Month==4|| Month==6 || Month==7
-				|| Month==9 || Month==11)) {
+		if ((Month == 0 || Month == 2 || Month == 4 || Month == 6 || Month == 7 || Month == 9 || Month == 11)) {
 			return 31 - Day;
-		} else if ((Month==3 || Month==5 || Month==8 || Month==10))
+		} else if ((Month == 3 || Month == 5 || Month == 8 || Month == 10))
 			return 30 - Day;
 		else
 			return 29 - Day;

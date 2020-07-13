@@ -22,6 +22,7 @@ import progetto_twitter.Springbootapp.util.*;
 
 public class ServiceImpl implements Service {
 	private StatsImpl StatObj = new StatsImpl();
+
 	@Override
 	public ArrayList<MetaDataModel> GETMetaData() {
 		Metadata.CMetaData();
@@ -59,7 +60,9 @@ public class ServiceImpl implements Service {
 		if (stat.equals("date") || stat.equals("url") || stat.equals("hashtags") || stat.equals("text")
 				|| stat.equals("image")) {
 			try {
-				return Choice.Stats(stat,StatObj, ListsCreate.Lists.getMList());
+				return Choice.Stats(stat, StatObj, ListsCreate.Lists.getMList(),
+						StatObj.HashStats(ListsCreate.Lists.getMList()),
+						StatObj.WordStats(ListsCreate.Lists.getMList()));
 			} catch (WrongStatisticException e) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 			}
@@ -67,19 +70,21 @@ public class ServiceImpl implements Service {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
 
 	}
-	public ArrayList<WordModel> GETWordList(String N) throws NumberFormatException{
+
+	public ArrayList<WordModel> GETWordList(String N) throws NumberFormatException {
 		int n;
 		try {
 			n = Integer.parseInt(N);
 		} catch (NumberFormatException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error : number of words must be a number");
 		}
-		if(n!=0)
-			return StatObj.getTopN(StatObj.WordStats(ListsCreate.Lists.getMList()),n);
+		if (n != 0)
+			return StatObj.getTopN(StatObj.WordStats(ListsCreate.Lists.getMList()), n);
 		else
-		return StatObj.WordStats(ListsCreate.Lists.getMList());
+			return StatObj.WordStats(ListsCreate.Lists.getMList());
 	}
-	public ArrayList<HashModel> GETHashList(){
+
+	public ArrayList<HashModel> GETHashList() {
 		return StatObj.HashStats(ListsCreate.Lists.getMList());
 	}
 }
