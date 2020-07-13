@@ -49,7 +49,7 @@ public class ServiceImpl {
 
 	public static void GETStatistics(String stat, String N) throws WrongStatisticException {
 		if(stat.equals("day")||stat.equals("month")||stat.equals("year")||stat.equals("url")||stat.equals("hashtags")||stat.equals("text") || stat.equals("image")) {
-			Choise.Stats(stat, N);
+			Choice.Stats(stat, N);
 		}
 		else
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");

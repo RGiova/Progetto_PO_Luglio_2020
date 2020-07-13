@@ -2,7 +2,7 @@ package progetto_twitter.Springbootapp.util;
 
 import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 
-public class Choise  {
+public class Choice  {
 
 
 	public static void Stats (String stat, String N ) throws WrongStatisticException {
