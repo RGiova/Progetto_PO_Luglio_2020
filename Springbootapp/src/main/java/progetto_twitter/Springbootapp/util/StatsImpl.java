@@ -61,7 +61,7 @@ public class StatsImpl implements Stats {
 	public ArrayList<WordModel> WordStats(ArrayList<JSONModel> objp) {
 
 		Iterator<?> t = objp.iterator();
-		ArrayList<WordModel> WordList = new ArrayList<WordModel>(objp.size());
+		ArrayList<WordModel> WordList = new ArrayList<WordModel>();
 		while (t.hasNext()) {
 			JSONModel p1 = new JSONModel();
 			p1 = (JSONModel) t.next();
@@ -71,12 +71,10 @@ public class StatsImpl implements Stats {
 			 * nelle singole parole che la compongono
 			 */
 
-			String Phrase = p1.getText().replaceAll("[^\\p{L}\\p{Z}]", "");
-			List<String> Words = new ArrayList<String>(Arrays.asList(Phrase.split("\s")));
-			boolean found = false;
+			String[] Phrase = p1.getText().replaceAll("[^\\p{L}\\p{Z}]", "").split("\s");
 			int index = 0;
-			for (int j = 0; j < Words.size(); j++) {
-				String Word = Words.get(j).toLowerCase();
+			for (int j = 0; j < Phrase.length; j++) {
+				String Word = Phrase[j].toLowerCase();
 
 				/* Controllo la parola per ignorare URL */
 
@@ -88,28 +86,26 @@ public class StatsImpl implements Stats {
 					for (int i = 0; i < WordList.size(); i++) {
 						if (WordList.get(i).getText().equals(Word)) {
 							index = i;
-							found = true;
+							WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
 							break;
 						}
+
 
 						/*
 						 * Incremento Occorrenze della parola se questa è già in lista, altrimenti la
 						 * inserisco
 						 */
-
-						if (found) {
-							WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
-						} else {
-							Integer length = Words.get(j).length();
-							WordModel NewWord = new WordModel(Words.get(index), length);
+						else {
+							int length = Word.length();
+							WordModel NewWord = new WordModel(Word, length);
 							WordList.add(NewWord);
 						}
 
 					}
 
 				} else {
-					Integer length = Words.get(j).length();
-					WordModel NewWord = new WordModel(Words.get(index), length);
+					int length = Word.length();
+					WordModel NewWord = new WordModel(Word, length);
 					WordList.add(NewWord);
 				}
 

@@ -15,7 +15,7 @@ public class HashModel implements Comparable<HashModel>  {
 	public int getOccorrenze() {
 		return Occorrenze;
 	}
-	public void setOccorrenze(Integer occorrenze) {
+	public void setOccorrenze(int occorrenze) {
 		Occorrenze = occorrenze;
 	}
 	public HashModel(String text) {
