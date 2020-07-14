@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
-
-import org.springframework.data.repository.query.ReturnedType;
-
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.model.ImageModel;

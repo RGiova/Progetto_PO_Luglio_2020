@@ -1,11 +1,6 @@
 package progetto_twitter.Springbootapp.util;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
-import org.json.simple.JSONArray;
-
-import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
 /**
  * Classe che crea i metadata
@@ -25,7 +20,7 @@ public class Metadata {
 		MDArray = mDArray;
 	}
 	/**
-	 * Metodo che riempi l'ArrayList di metadata inseredo le informazioni all'interno di modelli pretabiliti
+	 * Metodo che riempie l'ArrayList di metadata inserendo le informazioni all'interno di modelli prestabiliti
 	 */
 
 	public static void CMetaData() {

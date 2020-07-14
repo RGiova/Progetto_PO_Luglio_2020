@@ -1,12 +1,9 @@
 package progetto_twitter.Springbootapp.controller;
 
 import org.json.simple.JSONObject;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
@@ -15,7 +12,7 @@ import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.service.ServiceImpl;
 import progetto_twitter.Springbootapp.util.ListsCreate;
-import progetto_twitter.Springbootapp.util.StatsImpl;
+
 
 
 /**

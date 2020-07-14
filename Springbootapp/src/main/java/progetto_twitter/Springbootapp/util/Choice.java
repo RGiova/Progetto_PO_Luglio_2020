@@ -1,8 +1,6 @@
 package progetto_twitter.Springbootapp.util;
 
 import java.util.ArrayList;
-
-import progetto_twitter.Springbootapp.exceptions.WrongStatisticException;
 import progetto_twitter.Springbootapp.model.HashModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.StatsModel;

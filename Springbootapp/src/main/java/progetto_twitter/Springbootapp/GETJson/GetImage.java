@@ -2,12 +2,8 @@ package progetto_twitter.Springbootapp.GETJson;
 import progetto_twitter.Springbootapp.model.*;
 import java.util.Iterator;
 import java.util.Vector;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
-import progetto_twitter.Springbootapp.model.*;
 /**
  * 
  * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
@@ -45,7 +41,7 @@ public static Vector<ImageModel> GetImg(JSONObject ImgObj) {
 		 Media = (JSONArray)ImgObj.get("media");
 		 if (Media!=null) {
 		 Img = new Vector<ImageModel>();
-		 Iterator i = Media.iterator();
+		 Iterator<?> i = Media.iterator();
 	     MediaObj = new JSONObject();
 	     Sizes = new JSONObject();
 	     SizeMedium = new JSONObject();

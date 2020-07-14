@@ -2,8 +2,6 @@ package progetto_twitter.Springbootapp.GETJson;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 /**
@@ -34,7 +32,7 @@ public class GetUrlsHashtags {
 public static ArrayList<String> GetHashtags(JSONObject hashtagsObject) {
 	 temp = (JSONArray)hashtagsObject.get("hashtags");
 	 if (temp!=null) {
-	 Iterator i = temp.iterator();
+	 Iterator<?> i = temp.iterator();
      Hashtags = new ArrayList<String>();
      JSONObject obj = new JSONObject();
 	 while (i.hasNext()){
@@ -56,7 +54,7 @@ public static ArrayList<String> GetHashtags(JSONObject hashtagsObject) {
 public static ArrayList<String> GetUrls(JSONObject urlsObject) {
 		temp = (JSONArray)urlsObject.get("urls");
 		if (temp!=null) {
-	    Iterator i = temp.iterator();
+	    Iterator<?> i = temp.iterator();
 	    Urls = new ArrayList<String>();
 		JSONObject obj = new JSONObject();
 		 while (i.hasNext()){

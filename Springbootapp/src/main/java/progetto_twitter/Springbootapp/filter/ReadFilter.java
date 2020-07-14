@@ -3,18 +3,13 @@ package progetto_twitter.Springbootapp.filter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
 import progetto_twitter.Springbootapp.exceptions.WrongOperatorException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.model.*;
-import progetto_twitter.Springbootapp.util.ListsCreate;
 import progetto_twitter.Springbootapp.util.ModifyDate;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -195,7 +190,7 @@ public class ReadFilter extends FilterModel {
 			throw new WrongFormatExceptions();
 		setOperator(Aoperators[k]);
 		if (getField().equals("date")) {
-			Iterator i = getValues().iterator();
+			Iterator<?> i = getValues().iterator();
 			while (i.hasNext()) {
 				ModifyDate.DateVerify((String) i.next());
 			}
