@@ -8,6 +8,14 @@ import progetto_twitter.Springbootapp.model.HashModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.WordModel;
 
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
+/** 
+ * Interfaccia dei metodi legati alle statistiche dei tweet
+ */
+
 
 public interface Stats {
 	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) throws EmptyArgumentsException;

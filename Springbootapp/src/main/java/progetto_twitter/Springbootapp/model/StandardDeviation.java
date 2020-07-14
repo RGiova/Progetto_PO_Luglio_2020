@@ -1,6 +1,12 @@
 package progetto_twitter.Springbootapp.model;
 
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
 
+/**
+ * Calcolo cumulatuivo della deviazione standard
+ */
 public class StandardDeviation {
     int n = 0;
     double sum = 0;

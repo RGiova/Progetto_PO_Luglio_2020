@@ -1,6 +1,14 @@
 package progetto_twitter.Springbootapp.model;
-
 import java.util.ArrayList;
+
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
+
+/** 
+ * Modello utilizzato per facilitare l'analisi dei filtri
+ */
 
 public class FilterModel {
 	private String field;

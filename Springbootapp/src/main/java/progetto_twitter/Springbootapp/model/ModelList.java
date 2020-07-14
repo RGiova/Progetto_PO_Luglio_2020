@@ -1,7 +1,21 @@
 package progetto_twitter.Springbootapp.model;
 import java.util.*;
+
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
+/**
+ * Classe per la costruzione di ArrayList di JSONModel
+ */
+
 public class ModelList {
 	static List<JSONModel> MList = new ArrayList<JSONModel>();
+	
+	/**
+	 * Metodo per aggiungere modelli alla lista
+	 */
+	
 public static void ListAdd(JSONModel Mdl) {
 	MList.add(Mdl);
 	JSONModel Appoggio = new JSONModel();

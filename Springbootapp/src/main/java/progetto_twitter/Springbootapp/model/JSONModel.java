@@ -1,8 +1,17 @@
 package progetto_twitter.Springbootapp.model;
 
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
 import java.util.ArrayList;
 import java.util.Vector;
-
+/**
+ * Modello che racchiude i valori di interesse di un tweet, quali:
+ * id (del post e dell'utente), data, testo del tweet, url, hastag e immagini presenti
+ *  e nome dell'utente.
+ *  Presenta inoltre un campo boolean per facilitare l'utilizzo dei filtri
+ */
 public class JSONModel {
 private long post_id;
 private String date;

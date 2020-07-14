@@ -1,5 +1,13 @@
 package progetto_twitter.Springbootapp.model;
 
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
+/** 
+ * Modello che raccoglie le informazioni sui metadata
+ */
+
 public class MetaDataModel {
 private String alias;
 private String sourceField;

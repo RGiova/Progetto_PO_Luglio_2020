@@ -1,5 +1,14 @@
 package progetto_twitter.Springbootapp.model;
 
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
+
+/** 
+ * Modello che raccoglie tutte le statistiche calcolate dai metodi
+ * in un singolo oggetto
+ */
+
 public class StatsModel {
 private String Name;
 private int min;
@@ -7,6 +16,15 @@ private int max;
 private double average;
 private double StdDeviation;
 
+/** 
+ * Costruttore che imposta i valori del modello a quelli di input
+ * 
+ * @param name
+ * @param min
+ * @param max
+ * @param average
+ * @param stdDeviation
+ */
 
 public StatsModel(String name, int min, int max, double average, double stdDeviation) {
 	super();

@@ -16,8 +16,17 @@ import progetto_twitter.Springbootapp.model.ImageModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.WordModel;
 
-public class StatsImpl implements Stats {
+/** 
+ *@author Recchi Giovanni, Sopranzetti Lorenzo, Francesco Pigliapoco
+ */
 
+public class StatsImpl implements Stats {
+	/**
+	 * Metodo che genera una lista delle hashtag utilizzate nei tweet
+	 * 
+	 * @param objp
+	 * @throws EmptyArgumentsException
+	 * */
 	@Override
 	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
 		if(objp.size()==0) throw new EmptyArgumentsException();
@@ -30,9 +39,15 @@ public class StatsImpl implements Stats {
 			boolean found = false;
 			int index = 0;
 
-			/* Scorro HashList per constatare se l'hashtag è già stata utilizzata o meno */
+			/** 
+			 * Si scorre hash per controllare tutte le hastag utilizzate nel post 
+			 * */
 
 			for (int j = 0; j < hash.size(); j++) {
+				/** 
+				 * Si scorre HashList per constatare se l'hashtag è già stata utilizzata o meno
+				 *  Nel caso la lista sia vuota, si aggiunge direttamente l'elemento
+				 */
 				if (HashList.size() > 0) {
 					for (int i = 0; i < HashList.size() && !found; i++) {
 						if (HashList.get(i).getText().equals((hash.get(j)).toLowerCase())) {
@@ -40,7 +55,12 @@ public class StatsImpl implements Stats {
 							found = true;
 						}
 					}
-
+					
+					/**
+					 * Viene incrementato il campo Occurrences dell' hastag se questa è già in lista,
+					 * altrimenti viene inserita in coda
+					 */
+					
 					if (found) {
 						HashList.get(index).setOccurrences(HashList.get(index).getOccurrences() + 1);
 						found = false;
@@ -59,7 +79,13 @@ public class StatsImpl implements Stats {
 		return HashList;
 
 	}
-
+	/**
+	 * Metodo che genera una lista ordinata per occorrenze delle parole utilizzate nei tweet
+	 * (in ordine decrescente)
+	 * 
+	 * @param objp
+	 * @throws EmptyArgumentsException
+	 * */
 	@Override
 	public ArrayList<WordModel> WordStats(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
 		if(objp.size()==0) throw new EmptyArgumentsException();
@@ -70,9 +96,9 @@ public class StatsImpl implements Stats {
 			JSONModel p1 = new JSONModel();
 			p1 = (JSONModel) t.next();
 
-			/*
-			 * Elimino tutti i caratteri speciali (tranne gli spazi) e divido la stringa
-			 * nelle singole parole che la compongono
+			/**
+			 * Vengono eliminati tutti i caratteri speciali (tranne gli spazi) 
+			 * e si divide la stringa nelle singole parole che la compongono
 			 */
 
 			String[] Phrase = p1.getText().replaceAll("[^\\p{L}\\p{Z}]", "").split("\s");
@@ -80,10 +106,15 @@ public class StatsImpl implements Stats {
 			for (int j = 0; j < Phrase.length; j++) {
 				String Word = Phrase[j].toLowerCase();
 
-				/* Controllo la parola per ignorare URL e caratteri vuoti */
+				/* Si controlla la parola per ignorare URL e caratteri vuoti */
 
 				if (!(Word.length() > 4 && Word.substring(0, 4).equals("http") || Word.length() == 0)) {
-					/* Scorro WordList per constatare se la parola è già stata utilizzata o meno */
+					
+					/**
+					 * Si scorre WordList per constatare se la parola è già stata utilizzata o meno.
+					 * Nel caso la lista sia vuota, si aggiunge direttamente l'elemento
+					 */
+					
 					if (WordList.size() > 0) {
 						for (int i = 0; i < WordList.size() && !found; i++) {
 							if (WordList.get(i).getText().equals(Word)) {
@@ -91,11 +122,13 @@ public class StatsImpl implements Stats {
 								found = true;
 							}
 
-							/*
-							 * Incremento Occurrences della parola se questa è già in lista, altrimenti la
-							 * inserisco
-							 */
 						}
+
+						/*
+						 * Viene incrementato il campo Occurrences della parola se questa è già in lista,
+						 * altrimenti viene inserita in coda
+						 */
+						
 						if (found) {
 							WordList.get(index).setOccurrences(WordList.get(index).getOccurrences() + 1);
 							found = false;
@@ -115,12 +148,24 @@ public class StatsImpl implements Stats {
 			}
 
 		}
-
+		
+		/**
+		 * Viene ordinata la lista con ordine decrescente secondo le occorrenze
+		 */
+		
 		Collections.sort(WordList);
 
 		return WordList;
 	}
-
+	/**
+	 * Metodo che restituisce la top N delle parole utilizzate a partire da una WordList
+	 * copiando i primi N elementi della lista (che è già ordinata per occorrenze in ordine decrescente)
+	 * 
+	 * @param WordList
+	 * @param N
+	 * @throws EmptyArgumentsException
+	 * */
+	
 	@Override
 	public ArrayList<WordModel> getTopN(ArrayList<WordModel> WordList, int N) throws EmptyArgumentsException {
 		if(WordList.size()==0) throw new EmptyArgumentsException();
@@ -136,7 +181,13 @@ public class StatsImpl implements Stats {
 		return WordListN;
 
 	}
-
+	/**
+	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
+	 * riguardanti le dimensioni delle immagini contenute nei tweet (Larghezza W, Altezza H, Dimensione D)
+	 * 
+	 * @param objp
+	 * @throws EmptyArgumentsException
+	 * */
 	@Override
 	public ArrayList<StatsModel> IMGminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
 		if(objp.size()==0) throw new EmptyArgumentsException();
@@ -157,6 +208,12 @@ public class StatsImpl implements Stats {
 		double SDD = 0;
 		double index = 0;
 		double pics = 0;
+		
+		/**
+		 * Si scorrono con un iterator i modelli della lista e vengono calcolate 
+		 * le statistiche, tenendo conto del numero di immagini analizzate
+		 */
+		
 		Iterator<?> t = objp.iterator();
 		while (t.hasNext()) {
 			JSONModel ImgObj = (JSONModel) t.next();
@@ -192,7 +249,15 @@ public class StatsImpl implements Stats {
 		IMGStats.add(DStats);
 		return IMGStats;
 	}
-
+	
+	/**
+	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
+	 * riguardanti le il numero di URL all'interno dei tweet 
+	 * 
+	 * @param objp
+	 * @throws EmptyArgumentsException
+	 * */
+	
 	@Override
 	public ArrayList<StatsModel> URLminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
 		if(objp.size()==0) throw new EmptyArgumentsException();
@@ -203,6 +268,12 @@ public class StatsImpl implements Stats {
 		double SD = 0;
 		int index = 0;
 		int urls = 0;
+		
+		/**
+		 * Si scorrono con un iterator i modelli della lista e vengono calcolate 
+		 * le statistiche, tenendo conto del numero totale di url
+		 */
+		
 		Iterator<?> t = objp.iterator();
 		while (t.hasNext()) {
 			JSONModel URLObj = (JSONModel) t.next();
@@ -219,7 +290,13 @@ public class StatsImpl implements Stats {
 		URLS.add(appoggio);
 		return URLS;
 	}
-
+	/**
+	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
+	 * riguardanti la data di pubblicazione dei tweet
+	 * 
+	 * @param objp
+	 * @throws EmptyArgumentsException
+	 * */
 	@Override
 	public ArrayList<StatsModel> DateminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
 		if(objp.size()==0) throw new EmptyArgumentsException();
@@ -246,8 +323,12 @@ public class StatsImpl implements Stats {
 		Date thisDate = null;
 		Calendar thisCal = Calendar.getInstance();
 		Calendar lastCal = Calendar.getInstance();
-		Calendar firstCal = Calendar.getInstance();
-		Calendar Cal = Calendar.getInstance();
+		
+		/**
+		 * Si scorrono con un iterator i modelli della lista e vengono calcolate 
+		 * le statistiche, tenendo conto del numero totale di giorni e tweet
+		 */
+		
 		Iterator<?> t = objp.iterator();
 		while (t.hasNext()) {
 			JSONModel DateObj = (JSONModel) t.next();
@@ -258,12 +339,16 @@ public class StatsImpl implements Stats {
 				e.printStackTrace();
 			}
 			thisCal.setTime(thisDate);
-			if(!(Cal.getTime().equals(thisCal.getTime()))) {
-			if (DayTweetCount == 0) {
-				lastCal.setTime(thisDate);
-				firstCal.setTime(thisDate);
-				}
-		
+			
+			if (DayTweetCount == 0) lastCal.setTime(thisDate);
+			
+			/**
+			 * Viene controllata la data del tweet e, a seconda della variazione
+			 * (giorno, mese o anno), vengono incrementati i valori dei tweet
+			 * giornalieri, mensili e annuali. Ad ogni cambio vengono anche calcolati
+			 * minimo, massimo e variazione standard e viene incrementato il numero di tweet totali
+			 */
+			
 			if (thisCal.get(Calendar.YEAR) == lastCal.get(Calendar.YEAR)) {
 				if (thisCal.get(Calendar.MONTH) == lastCal.get(Calendar.MONTH)) {
 					if (thisCal.get(Calendar.DAY_OF_MONTH) == lastCal.get(Calendar.DAY_OF_MONTH)) {
@@ -277,9 +362,11 @@ public class StatsImpl implements Stats {
 						MonTweetCount += DayTweetCount;
 						TotalTweets += DayTweetCount;
 						DayTweetCount = 1;
-
 					}
-
+					/**
+					 * Una volta fatto un cambio, la variabile dei tweet periodici (es. giornaliera)
+					 * viene resettata a 1, cioè il tweet che stiamo analizzando in questo ciclo
+					 */
 				} else {
 					MAXMon = Math.max(MAXMon, MonTweetCount);
 					minMon = Math.min(minMon, MonTweetCount);
@@ -290,7 +377,7 @@ public class StatsImpl implements Stats {
 					DayTotal += lastCal.get(Calendar.DAY_OF_YEAR) - thisCal.get(Calendar.DAY_OF_YEAR);
 					lastCal.setTime(thisDate);
 					MonTotal++;
-					Cal.setTime(firstCal.getTime());
+					
 				}
 
 			} else {
@@ -304,8 +391,12 @@ public class StatsImpl implements Stats {
 				YrTotal++;
 
 			}
-		} else break;
+
 		}
+		/**
+		 * Se non c'è mai un cambio di mese o anno, vengono valorizzati a 1 i totali
+		 * per permettere il calcolo delle medie, e vengono copiati i valori del periodo più piccolo
+		 */
 		if (MonTotal == 0) {
 			MonTotal = 1;
 			MAXMon = MAXDay;
@@ -325,7 +416,13 @@ public class StatsImpl implements Stats {
 		DateStats.add(YrStats);
 		return DateStats;
 	}
-
+	/**
+	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
+	 * riguardanti le occorrenze degli hastag utilizzati dall'utente nei post
+	 * 
+	 * @param HashList
+	 * @throws EmptyArgumentsException
+	 * */
 	@Override
 	public ArrayList<StatsModel> HminAvgMAX(ArrayList<HashModel> HashList) throws EmptyArgumentsException {
 		if(HashList.size()==0) throw new EmptyArgumentsException();
@@ -351,7 +448,15 @@ public class StatsImpl implements Stats {
 		return HashS;
 
 	}
-
+	
+	/**
+	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
+	 * riguardanti la lunghezza delle parole utilizzate nei post nei post
+	 * 
+	 * @param WordList
+	 * @throws EmptyArgumentsException
+	 * */
+	
 	@Override
 	public ArrayList<StatsModel> WminAvgMAX(ArrayList<WordModel> WordList) throws EmptyArgumentsException {
 		if(WordList.size()==0) throw new EmptyArgumentsException();
