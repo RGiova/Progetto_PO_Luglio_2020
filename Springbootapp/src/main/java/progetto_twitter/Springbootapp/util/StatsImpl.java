@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import progetto_twitter.Springbootapp.model.StandardDeviation;
 import progetto_twitter.Springbootapp.model.StatsModel;
+import progetto_twitter.Springbootapp.exceptions.EmptyArgumentsException;
 import progetto_twitter.Springbootapp.model.HashModel;
 import progetto_twitter.Springbootapp.model.ImageModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
@@ -18,8 +19,8 @@ import progetto_twitter.Springbootapp.model.WordModel;
 public class StatsImpl implements Stats {
 
 	@Override
-	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) {
-		
+	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
+		if(objp.size()==0) throw new EmptyArgumentsException();
 		Iterator<?> t = objp.iterator();
 		ArrayList<HashModel> HashList = new ArrayList<HashModel>();
 		while (t.hasNext()) {
@@ -60,8 +61,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<WordModel> WordStats(ArrayList<JSONModel> objp) {
-
+	public ArrayList<WordModel> WordStats(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
+		if(objp.size()==0) throw new EmptyArgumentsException();
 		Iterator<?> t = objp.iterator();
 		ArrayList<WordModel> WordList = new ArrayList<WordModel>();
 		boolean found = false;
@@ -121,7 +122,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<WordModel> getTopN(ArrayList<WordModel> WordList, int N) {
+	public ArrayList<WordModel> getTopN(ArrayList<WordModel> WordList, int N) throws EmptyArgumentsException {
+		if(WordList.size()==0) throw new EmptyArgumentsException();
 		int index = 0;
 		Iterator<?> t = WordList.iterator();
 		ArrayList<WordModel> WordListN = new ArrayList<WordModel>(N - 1);
@@ -136,8 +138,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<StatsModel> IMGminAvgMAX(ArrayList<JSONModel> objp) {
-		
+	public ArrayList<StatsModel> IMGminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
+		if(objp.size()==0) throw new EmptyArgumentsException();
 		long minW = 10000;
 		long MAXW = 0;
 		double AvgW = 0;
@@ -192,7 +194,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<StatsModel> URLminAvgMAX(ArrayList<JSONModel> objp) {
+	public ArrayList<StatsModel> URLminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
+		if(objp.size()==0) throw new EmptyArgumentsException();
 		int min = 10000;
 		int MAX = 0;
 		int Avg = 0;
@@ -218,8 +221,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<StatsModel> DateminAvgMAX(ArrayList<JSONModel> objp) {
-		if(objp.size()==0) return new ArrayList<StatsModel>();
+	public ArrayList<StatsModel> DateminAvgMAX(ArrayList<JSONModel> objp) throws EmptyArgumentsException {
+		if(objp.size()==0) throw new EmptyArgumentsException();
 		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
 		int minDay = 10000;
 		int MAXDay = 0;
@@ -324,7 +327,8 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<StatsModel> HminAvgMAX(ArrayList<HashModel> HashList) {
+	public ArrayList<StatsModel> HminAvgMAX(ArrayList<HashModel> HashList) throws EmptyArgumentsException {
+		if(HashList.size()==0) throw new EmptyArgumentsException();
 		int min = HashList.get(0).getOccurrences();
 		int MAX = HashList.get(0).getOccurrences();
 		double Avg = 0;
@@ -349,8 +353,9 @@ public class StatsImpl implements Stats {
 	}
 
 	@Override
-	public ArrayList<StatsModel> WminAvgMAX(ArrayList<WordModel> WordList) {
-		int min = 10000;
+	public ArrayList<StatsModel> WminAvgMAX(ArrayList<WordModel> WordList) throws EmptyArgumentsException {
+		if(WordList.size()==0) throw new EmptyArgumentsException();
+		int min = 0;
 		int MAX = 0;
 		double Avg = 0;
 		StandardDeviation sd = new StandardDeviation();
@@ -359,6 +364,7 @@ public class StatsImpl implements Stats {
 		Iterator<?> t = WordList.iterator();
 		while (t.hasNext()) {
 			WordModel Word = (WordModel) t.next();
+			if (index==0) min = Word.getLength();
 			MAX = Math.max(MAX, Word.getLength());
 			min = Math.min(min, Word.getLength());
 			Avg += Word.getLength();

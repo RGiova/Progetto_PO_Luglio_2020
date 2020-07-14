@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+import progetto_twitter.Springbootapp.exceptions.EmptyArgumentsException;
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
@@ -25,6 +26,6 @@ public interface Service {
 
 	ArrayList<MetaDataModel> GETMetaData();
 
-	ArrayList<StatsModel> GETStatistics(String stat) throws WrongStatisticException;
+	ArrayList<StatsModel> GETStatistics(String stat) throws WrongStatisticException, EmptyArgumentsException;
 
 }

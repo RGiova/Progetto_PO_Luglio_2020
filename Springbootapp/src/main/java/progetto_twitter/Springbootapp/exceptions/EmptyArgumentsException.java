@@ -1,9 +1,9 @@
 package progetto_twitter.Springbootapp.exceptions;
 
-public class NoneArgumentsExceptio extends Exception{
+public class EmptyArgumentsException extends Exception{
 
-	public NoneArgumentsExceptio() {
-		super("Error : No tweets found");
+	public EmptyArgumentsException() {
+		super("Error : No tweets found or missing elements for stat calculation");
 	}
 	
 
