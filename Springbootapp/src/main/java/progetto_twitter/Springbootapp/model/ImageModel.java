@@ -1,25 +1,32 @@
 package progetto_twitter.Springbootapp.model;
 
 public class ImageModel {
-private long w;
-private long h;
+private Long w;
+private Long h;
+private Long dimension;
 
-public ImageModel(long w, long h) {
+public ImageModel(Long w, Long h) {
 	super();
 	this.w = w;
 	this.h = h;
+	this.setDimension(w*h);
 }
 public long getW() {
 	return w;
 }
-public void setW(int w) {
+public void setW(Long w) {
 	this.w = w;
 }
 public long getH() {
 	return h;
 }
-public void setH(int h) {
+public void setH(Long h) {
 	this.h = h;
 }
-
+public long getDimension() {
+	return dimension;
+}
+public void setDimension(Long dimension) {
+	this.dimension = dimension;
+}
 }
