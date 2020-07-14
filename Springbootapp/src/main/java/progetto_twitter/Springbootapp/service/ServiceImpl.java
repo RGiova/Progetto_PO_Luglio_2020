@@ -59,14 +59,10 @@ public class ServiceImpl implements Service {
 	public ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException {
 		if (stat.equals("date") || stat.equals("url") || stat.equals("hashtags") || stat.equals("text")
 				|| stat.equals("image")) {
-			try {
 				return Choice.Stats(stat, StatObj, List,
 						StatObj.HashStats(List),
 						StatObj.WordStats(List));
-			} catch (WrongStatisticException e) {
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-			}
-		} else
+			} else
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
 
 	}

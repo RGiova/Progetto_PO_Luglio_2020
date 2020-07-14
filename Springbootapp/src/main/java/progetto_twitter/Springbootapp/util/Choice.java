@@ -10,7 +10,7 @@ import progetto_twitter.Springbootapp.model.WordModel;
 
 public class Choice {
 
-	public static ArrayList<StatsModel> Stats(String stat,StatsImpl StatObj, ArrayList<JSONModel> List, ArrayList<HashModel> HList, ArrayList<WordModel> WList) throws WrongStatisticException {
+	public static ArrayList<StatsModel> Stats(String stat,StatsImpl StatObj, ArrayList<JSONModel> List, ArrayList<HashModel> HList, ArrayList<WordModel> WList){
 		switch (stat) {
 		case "date":		
 			return StatObj.DateminAvgMAX(List);

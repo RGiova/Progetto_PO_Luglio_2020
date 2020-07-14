@@ -3,11 +3,10 @@ package progetto_twitter.Springbootapp.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import progetto_twitter.Springbootapp.model.StandardDeviation;
 import progetto_twitter.Springbootapp.model.StatsModel;
@@ -21,7 +20,7 @@ public class StatsImpl implements Stats {
 	@Override
 	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) {
 		Iterator<?> t = objp.iterator();
-		ArrayList<HashModel> HashList = new ArrayList<HashModel>(objp.size());
+		ArrayList<HashModel> HashList = new ArrayList<HashModel>();
 		while (t.hasNext()) {
 			JSONModel p1 = new JSONModel();
 			p1 = (JSONModel) t.next();
@@ -34,21 +33,21 @@ public class StatsImpl implements Stats {
 			for (int j = 0; j < hash.size(); j++) {
 				if (HashList.size() > 0) {
 					for (int i = 0; i < HashList.size() && !found; i++) {
-						if (HashList.get(i).getText().equals(hash.get(j))) {
+						if (HashList.get(i).getText().equals((hash.get(j)).toLowerCase())) {
 							index = i;
 							found = true;
 						}
 					}
 
 					if (found) {
-						HashList.get(index).setOccorrenze(HashList.get(index).getOccorrenze() + 1);
-						found=false;
+						HashList.get(index).setOccurrences(HashList.get(index).getOccurrences() + 1);
+						found = false;
 					} else {
-						HashModel NewHash = new HashModel(hash.get(j));
+						HashModel NewHash = new HashModel(hash.get(j).toLowerCase());
 						HashList.add(NewHash);
 					}
 				} else {
-					HashModel NewHash = new HashModel(hash.get(j));
+					HashModel NewHash = new HashModel(hash.get(j).toLowerCase());
 					HashList.add(NewHash);
 				}
 			}
@@ -64,7 +63,6 @@ public class StatsImpl implements Stats {
 
 		Iterator<?> t = objp.iterator();
 		ArrayList<WordModel> WordList = new ArrayList<WordModel>();
-		ArrayList<WordModel> App = new ArrayList<WordModel>();
 		boolean found = false;
 		while (t.hasNext()) {
 			JSONModel p1 = new JSONModel();
@@ -80,39 +78,38 @@ public class StatsImpl implements Stats {
 			for (int j = 0; j < Phrase.length; j++) {
 				String Word = Phrase[j].toLowerCase();
 
-				/* Controllo la parola per ignorare URL */
+				/* Controllo la parola per ignorare URL e caratteri vuoti */
 
-				if (!(Word.length() > 4 && Word.substring(0, 4).equals("http") || Word.length() == 0))
-				{
-				/* Scorro WordList per constatare se la parola è già stata utilizzata o meno */
-				if (WordList.size() > 0) {
-					for (int i = 0; i < WordList.size() && !found; i++) {
-						if (WordList.get(i).getText().equals(Word)) {
-							index = i;
-							found = true;
+				if (!(Word.length() > 4 && Word.substring(0, 4).equals("http") || Word.length() == 0)) {
+					/* Scorro WordList per constatare se la parola è già stata utilizzata o meno */
+					if (WordList.size() > 0) {
+						for (int i = 0; i < WordList.size() && !found; i++) {
+							if (WordList.get(i).getText().equals(Word)) {
+								index = i;
+								found = true;
+							}
+
+							/*
+							 * Incremento Occurrences della parola se questa è già in lista, altrimenti la
+							 * inserisco
+							 */
+						}
+						if (found) {
+							WordList.get(index).setOccurrences(WordList.get(index).getOccurrences() + 1);
+							found = false;
+						} else {
+							int length = Word.length();
+							WordModel NewWord = new WordModel(Word, length);
+							WordList.add(NewWord);
 						}
 
-						/*
-						 * Incremento Occorrenze della parola se questa è già in lista, altrimenti la
-						 * inserisco
-						 */
-					}
-					if (found) {
-						WordList.get(index).setOccorrenze(WordList.get(index).getOccorrenze() + 1);
-						found=false;
 					} else {
 						int length = Word.length();
 						WordModel NewWord = new WordModel(Word, length);
 						WordList.add(NewWord);
 					}
 
-				} else {
-					int length = Word.length();
-					WordModel NewWord = new WordModel(Word, length);
-					WordList.add(NewWord);
 				}
-
-			}
 			}
 
 		}
@@ -130,7 +127,7 @@ public class StatsImpl implements Stats {
 		while (t.hasNext() && index < N) {
 			WordListN.get(index).setText(WordList.get(index).getText());
 			WordListN.get(index).setLength(WordList.get(index).getLength());
-			WordListN.get(index).setOccorrenze(WordList.get(index).getOccorrenze());
+			WordListN.get(index).setOccurrences(WordList.get(index).getOccurrences());
 			index++;
 		}
 		return WordListN;
@@ -159,39 +156,32 @@ public class StatsImpl implements Stats {
 		Iterator<?> t = objp.iterator();
 		while (t.hasNext()) {
 			JSONModel ImgObj = (JSONModel) t.next();
-			if(ImgObj.getImg()!=null)
-			{
-			Iterator<?> i = ImgObj.getImg().iterator();
-			while (i.hasNext()) {
-				ImageModel Img = (ImageModel) i.next();
-				if (Img.getW() > MAXW)
-					MAXW = Img.getW();
-				if (Img.getW() < minW)
-					minW = Img.getW();
-				AvgW += Img.getW();
-				SDW = sd1.SD(Img.getW());
-				if (Img.getH() > MAXH)
-					MAXH = Img.getH();
-				if (Img.getH() < minH)
-					minH = Img.getH();
-				AvgH += Img.getH();
-				SDH = sd2.SD(Img.getH());
-				if (Img.getDimension() > MAXD)
-					MAXD = Img.getDimension();
-				if (Img.getDimension() < minD)
-					minD = Img.getDimension();
-				AvgD += Img.getDimension();
-				SDD = sd3.SD(Img.getDimension());
-				pics++;
+			if (ImgObj.getImg() != null) {
+				Iterator<?> i = ImgObj.getImg().iterator();
+				while (i.hasNext()) {
+					ImageModel Img = (ImageModel) i.next();
+					MAXW = Math.max(MAXW, Img.getW());
+					minW = Math.min(minW, Img.getW());
+					AvgW += Img.getW();
+					SDW = sd1.SD(Img.getW());
+					MAXH = Math.max(MAXH, Img.getH());
+					minH = Math.min(minH, Img.getH());
+					AvgH += Img.getH();
+					SDH = sd2.SD(Img.getH());
+					MAXD = Math.max(MAXD, Img.getDimension());
+					minD = Math.min(minD, Img.getDimension());
+					AvgD += Img.getDimension();
+					SDD = sd3.SD(Img.getDimension());
+					pics++;
+				}
+				index += pics;
+				pics = 0;
 			}
-			index += pics;
-			pics = 0;
-		}
 		}
 		ArrayList<StatsModel> IMGStats = new ArrayList<StatsModel>();
-		StatsModel WStats = new StatsModel("Width", (int) minW, (int) MAXW, AvgW / index, SDW);
-		StatsModel HStats = new StatsModel("Height", (int) minH, (int) MAXH, AvgH / index, SDH);
-		StatsModel DStats = new StatsModel("Dimension", (int) minD, (int) MAXD, AvgD / index, SDD);
+		StatsModel WStats = new StatsModel("Image Width", (int) minW, (int) MAXW, AvgW / index, SDW);
+		StatsModel HStats = new StatsModel("Image Height", (int) minH, (int) MAXH, AvgH / index, SDH);
+		StatsModel DStats = new StatsModel("Image Dimension", (int) minD, (int) MAXD, AvgD / index, SDD);
 		IMGStats.add(WStats);
 		IMGStats.add(HStats);
 		IMGStats.add(DStats);
@@ -211,128 +201,137 @@ public class StatsImpl implements Stats {
 		while (t.hasNext()) {
 			JSONModel URLObj = (JSONModel) t.next();
 			urls = URLObj.getURL().size();
+			MAX = Math.max(MAX, urls);
+			min = Math.min(min, urls);
+			Avg += urls;
 			SD = sd.SD(urls);
 			index += urls;
 		}
 		ArrayList<StatsModel> URLS = new ArrayList<StatsModel>();
-		StatsModel appoggio = new StatsModel("URL", min, MAX, Avg / index, SD);
+		StatsModel appoggio = new StatsModel("URLs per post", min, MAX, Avg / index, SD);
 		URLS.add(appoggio);
 		return URLS;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public ArrayList<StatsModel> DateminAvgMAX(ArrayList<JSONModel> objp) {
 		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
 		int minDay = 10000;
 		int MAXDay = 0;
-		double AvgDay = 0;
 		StandardDeviation sd1 = new StandardDeviation();
 		double SDDay = 0;
 		int minMon = 10000;
 		int MAXMon = 0;
-		int AvgMon = 0;
 		StandardDeviation sd2 = new StandardDeviation();
 		double SDMon = 0;
 		int minYr = 10000;
 		int MAXYr = 0;
-		int AvgYr = 0;
 		StandardDeviation sd3 = new StandardDeviation();
 		double SDYr = 0;
-		int DayTotal = 0;
-		int MonTotal = 0;
-		int YrTotal = 0;
+		double DayTotal = 0;
+		double MonTotal = 0;
+		double YrTotal = 0;
+		double TotalTweets = 0;
 		int DayTweetCount = 0;
 		int MonTweetCount = 0;
 		int YrTweetCount = 0;
+		Date thisDate = null;
+		Calendar thisCal = Calendar.getInstance();
+		Calendar lastCal = Calendar.getInstance();
+		Calendar firstCal = Calendar.getInstance();
+		Calendar Cal = Calendar.getInstance();
 		Iterator<?> t = objp.iterator();
-		Date lastDate = null;
 		while (t.hasNext()) {
 			JSONModel DateObj = (JSONModel) t.next();
 			String[] SplitDate = DateObj.getDate().split("/");
-			Date thisDate = null;
 			try {
 				thisDate = sdformat.parse(SplitDate[2] + "-" + SplitDate[1] + "-" + SplitDate[0]);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			if (DayTweetCount==0)
-				lastDate = thisDate;
-			if (thisDate.getYear() == lastDate.getYear()) {
-				if (thisDate.getMonth() == lastDate.getMonth()) {
-					System.out.println(thisDate.getMonth()+"  "+lastDate.getMonth());
-					if (thisDate.getDate() == lastDate.getDate()) {
+			thisCal.setTime(thisDate);
+			if(!(Cal.getTime().equals(thisCal.getTime()))) {
+			if (DayTweetCount == 0) {
+				lastCal.setTime(thisDate);
+				firstCal.setTime(thisDate);
+				}
+		
+			if (thisCal.get(Calendar.YEAR) == lastCal.get(Calendar.YEAR)) {
+				if (thisCal.get(Calendar.MONTH) == lastCal.get(Calendar.MONTH)) {
+					if (thisCal.get(Calendar.DAY_OF_MONTH) == lastCal.get(Calendar.DAY_OF_MONTH)) {
 						DayTweetCount++;
-					}
-					else {
-						if (DayTweetCount < minDay)
-							minDay = DayTweetCount;
-						if (DayTweetCount > MAXDay)
-							MAXDay = DayTweetCount;
-						AvgDay += DayTweetCount;
+					} else {
+						MAXDay = Math.max(MAXDay, DayTweetCount);
+						minDay = Math.min(minDay, DayTweetCount);
 						SDDay = sd1.SD(DayTweetCount);
-						DayTotal += lastDate.getDate() - thisDate.getDate();
-						lastDate = thisDate;
+						DayTotal += lastCal.get(Calendar.DAY_OF_YEAR) - thisCal.get(Calendar.DAY_OF_YEAR);
+						lastCal.setTime(thisDate);
 						MonTweetCount += DayTweetCount;
+						TotalTweets += DayTweetCount;
 						DayTweetCount = 1;
 
 					}
 
 				} else {
-					if (MonTweetCount < minMon)
-						minMon = MonTweetCount;
-					if (MonTweetCount > MAXMon)
-						MAXMon = MonTweetCount;
-					AvgMon += MonTweetCount;
+					MAXMon = Math.max(MAXMon, MonTweetCount);
+					minMon = Math.min(minMon, MonTweetCount);
 					SDMon = sd2.SD(MonTweetCount);
 					YrTweetCount += MonTweetCount;
 					MonTweetCount = 1;
-					DayTotal += lastDate.getDay() + MissingDays(thisDate.getMonth(), thisDate.getDate());
-					lastDate = thisDate;
+					TotalTweets += MonTweetCount;
+					DayTotal += lastCal.get(Calendar.DAY_OF_YEAR) - thisCal.get(Calendar.DAY_OF_YEAR);
+					lastCal.setTime(thisDate);
 					MonTotal++;
+					Cal.setTime(firstCal.getTime());
 				}
 
 			} else {
-				if (YrTweetCount < minYr)
-					minDay = YrTweetCount;
-				if (YrTweetCount > MAXYr)
-					MAXDay = YrTweetCount;
-				AvgYr += YrTweetCount;
+				MAXYr = Math.max(MAXYr, YrTweetCount);
+				minYr = Math.min(minYr, YrTweetCount);
 				SDYr = sd3.SD(YrTweetCount);
 				YrTweetCount = 1;
-				DayTotal += lastDate.getDay() + MissingDays(thisDate.getMonth(), thisDate.getDate());
-				lastDate = thisDate;
+				TotalTweets += YrTweetCount;
+				DayTotal += lastCal.get(Calendar.DAY_OF_YEAR) - thisCal.get(Calendar.DAY_OF_YEAR);
+				lastCal.setTime(thisDate);
 				YrTotal++;
 
 			}
-
+		} else break;
+		}
+		if (YrTotal == 0) {
+			YrTotal = 1;
+			MAXYr = MAXMon;
+			minYr = minMon;
 		}
 		ArrayList<StatsModel> DateStats = new ArrayList<StatsModel>();
-		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, AvgDay / (double)DayTotal, SDDay);
-		StatsModel MonStats = new StatsModel("Tweets per Month", minMon, MAXMon, AvgMon / MonTotal, SDMon);
-		//StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, AvgYr / YrTotal, SDYr);
+		StatsModel DayStats = new StatsModel("Tweets per Day", minDay, MAXDay, TotalTweets / DayTotal, SDDay);
+		StatsModel MonStats = new StatsModel("Tweets per Month", minMon, MAXMon, TotalTweets / MonTotal, SDMon);
+		StatsModel YrStats = new StatsModel("Tweets per Year", minYr, MAXYr, TotalTweets / YrTotal, SDYr);
 		DateStats.add(DayStats);
 		DateStats.add(MonStats);
-		//DateStats.add(YrStats);
+		DateStats.add(YrStats);
 		return DateStats;
 	}
 
 	@Override
 	public ArrayList<StatsModel> HminAvgMAX(ArrayList<HashModel> HashList) {
-		int min = HashList.get(0).getOccorrenze();
-		int MAX = HashList.get(0).getOccorrenze();
-		int Avg = 0;
-		int index = 0;
+		int min = HashList.get(0).getOccurrences();
+		int MAX = HashList.get(0).getOccurrences();
+		double Avg = 0;
+		StandardDeviation sd = new StandardDeviation();
+		double SD = 0;
+		double index = 0;
 		Iterator<?> t = HashList.iterator();
 		while (t.hasNext()) {
-			if (HashList.get(index).getOccorrenze() > MAX)
-				MAX = HashList.get(index).getOccorrenze();
-			if (HashList.get(index).getOccorrenze() < min)
-				min = HashList.get(index).getOccorrenze();
-			Avg += HashList.get(index).getOccorrenze();
+			HashModel Hashtag = (HashModel) t.next();
+			MAX = Math.max(MAX, Hashtag.getOccurrences());
+			min = Math.min(min, Hashtag.getOccurrences());
+			Avg += Hashtag.getOccurrences();
+			SD = sd.SD(Hashtag.getOccurrences());
+			index++;
 		}
 		ArrayList<StatsModel> HashS = new ArrayList<StatsModel>();
-		StatsModel appoggio = new StatsModel("Hashtag", min, MAX, Avg, 0);
+		StatsModel appoggio = new StatsModel("Hashtag Occurrences", min, MAX, Avg/index, SD);
 		HashS.add(appoggio);
 		return HashS;
 
@@ -340,31 +339,24 @@ public class StatsImpl implements Stats {
 
 	@Override
 	public ArrayList<StatsModel> WminAvgMAX(ArrayList<WordModel> WordList) {
-		int min = WordList.get(WordList.size() - 1).getOccorrenze();
-		int MAX = WordList.get(0).getOccorrenze();
-		int Avg = 0;
-		int index = 0;
+		int min = 10000;
+		int MAX = 0;
+		double Avg = 0;
+		StandardDeviation sd = new StandardDeviation();
+		double SD = 0;
+		double index = 0;
 		Iterator<?> t = WordList.iterator();
 		while (t.hasNext()) {
-			if (WordList.get(index).getOccorrenze() > MAX)
-				MAX = WordList.get(index).getOccorrenze();
-			if (WordList.get(index).getOccorrenze() < min)
-				min = WordList.get(index).getOccorrenze();
-			Avg += WordList.get(index).getOccorrenze();
+			WordModel Word = (WordModel) t.next();
+			MAX = Math.max(MAX, Word.getLength());
+			min = Math.min(min, Word.getLength());
+			Avg += Word.getLength();
+			SD = sd.SD(Word.getLength());
+			index++;
 		}
 		ArrayList<StatsModel> WordS = new ArrayList<StatsModel>();
-		StatsModel appoggio = new StatsModel("Words", min, MAX, Avg, 0);
+		StatsModel appoggio = new StatsModel("Word Length", min, MAX, Avg/index, SD);
 		WordS.add(appoggio);
 		return WordS;
-	}
-
-	public int MissingDays(int Month, int Day) {
-
-		if ((Month == 0 || Month == 2 || Month == 4 || Month == 6 || Month == 7 || Month == 9 || Month == 11)) {
-			return 31 - Day;
-		} else if ((Month == 3 || Month == 5 || Month == 8 || Month == 10))
-			return 30 - Day;
-		else
-			return 29 - Day;
 	}
 }
