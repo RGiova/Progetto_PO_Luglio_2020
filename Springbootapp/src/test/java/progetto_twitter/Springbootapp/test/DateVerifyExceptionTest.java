@@ -10,13 +10,13 @@ import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.util.ModifyDate;
 
 class DateVerifyExceptionTest {
+	ModifyDate obj = new ModifyDate();
 	@BeforeEach
 	void SetUp() throws Exception{
-		
 	}
 	@AfterEach
 	void tearDown() throws Exception{
-		
+		ModifyDate obj = new ModifyDate();
 	}
 
 	@Test
