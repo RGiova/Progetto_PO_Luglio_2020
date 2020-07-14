@@ -1,8 +1,18 @@
 package progetto_twitter.Springbootapp.util;
 
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
-
+/**
+ * 
+ *  @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
+ *  Classe che gestisce le principali operazioni che vengono fatte sulle date
+ *
+ */
 public class ModifyDate {
+	/**
+	 * Metodo che converte i mesi da parole a numeri
+	 * @param date
+	 * @return la data nel formato giusto
+	 */
 	public static String Date(String date) {
 		String[] app = date.split(" ");
 		String giorno = app[2];
@@ -48,7 +58,11 @@ public class ModifyDate {
 		}
 		return giorno + "/" + mese + "/" + anno;
 	}
-
+/**
+ * Metodo che controlla se il formato della data sia corretto
+ * @param Date
+ * @throws WrongDateFormatException
+ */
 	public static void DateVerify(String Date) throws WrongDateFormatException {
 		String[] DateParsed = Date.split("/");
 		if (DateParsed.length < 3)
@@ -56,7 +70,14 @@ public class ModifyDate {
 					"Error : wrong date format. Date format is expected to be like: (\" 01/01/2020 \") ");
 		DateVerify2(DateParsed[0], DateParsed[1], DateParsed[2]);
 
-	}
+	} 
+	/**
+	 * Metodo che controllo che il formato della data sia corretto
+	 * @param Day
+	 * @param Month
+	 * @param Year
+	 * @throws WrongDateFormatException
+	 */
 
 	public static void DateVerify2(String Day, String Month, String Year) throws WrongDateFormatException {
 

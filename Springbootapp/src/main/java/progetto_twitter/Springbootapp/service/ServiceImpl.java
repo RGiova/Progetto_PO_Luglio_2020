@@ -19,21 +19,35 @@ import progetto_twitter.Springbootapp.model.MetaDataModel;
 import progetto_twitter.Springbootapp.model.StatsModel;
 import progetto_twitter.Springbootapp.model.WordModel;
 import progetto_twitter.Springbootapp.util.*;
-
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
+ * Classe che gestisce le funzioni del programma
+ */
 public class ServiceImpl implements Service {
+	/**
+	 * Oggetto che contiene al suo interno i metodi per le statistiche
+	 */
 	private StatsImpl StatObj = new StatsImpl();
-
+/**
+ * Metodo che restituisce i metadati
+ * 
+ */
 	@Override
 	public ArrayList<MetaDataModel> GETMetaData() {
 		Metadata.CMetaData();
 		return Metadata.getMDArray();
 	}
-
+/**
+ * Metodo che restituisce i dati
+ */
 	@Override
 	public ArrayList<JSONModel> GETData() {
 		return ListsCreate.Lists.getMList();
 	}
-
+/**
+ * Metodo che gestisce la richiesta di filtraggio dei dati
+ */
 	@Override
 	public void GETFilter(JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException,
 			WrongValueException, WrongDateFormatException {
@@ -45,6 +59,9 @@ public class ServiceImpl implements Service {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
+	/**
+	 * Metodo che restituisce i dati filtrati
+	 */
 
 	@Override
 	public ArrayList<JSONModel> GETDataFiltered() {
@@ -54,7 +71,9 @@ public class ServiceImpl implements Service {
 			ListsCreate.Lists.getToFilterList2().clear();
 		return ListsCreate.Lists.getToPushList();
 	}
-
+/**
+ * Metodo che gestisce la richiesta delle statistiche 
+ */
 	@Override
 	public ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException {
 		if (stat.equals("date") || stat.equals("url") || stat.equals("hashtags") || stat.equals("text")
@@ -66,7 +85,9 @@ public class ServiceImpl implements Service {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
 
 	}
-	
+	/**
+	 * Metodo che gestisce la richiesta della classifica di parole più utilizzate
+	 */
     @Override
 	public ArrayList<WordModel> GETWordList(String N) throws NumberFormatException {
 		int n;
@@ -80,12 +101,17 @@ public class ServiceImpl implements Service {
 		else
 			return StatObj.WordStats(ListsCreate.Lists.getMList());
 	}
-    
+    /**
+     * Metodo che gestisce la richiesta della lista di hashtags
+     */
     @Override
 	public ArrayList<HashModel> GETHashList() {
 		return StatObj.HashStats(ListsCreate.Lists.getMList());
 	}
     @Override
+    /**
+     * Metodo che gestisce la richiesta di statistiche su un insieme di dati filtrati
+     */
 	public ArrayList<StatsModel> GETStatsFiltered(String stat, JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException, WrongValueException, WrongDateFormatException, WrongStatisticException{
 		GETFilter(obj);
 		return GETStatistics(stat, GETDataFiltered());

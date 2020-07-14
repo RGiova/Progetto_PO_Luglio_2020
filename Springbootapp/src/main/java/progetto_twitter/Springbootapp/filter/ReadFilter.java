@@ -17,20 +17,60 @@ import progetto_twitter.Springbootapp.util.ModifyDate;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco Classe che
+ *         legge e interpreta il filtro fornito
+ *
+ */
 public class ReadFilter extends FilterModel {
+	/**
+	 * Tutti i campi possibili
+	 */
 	private String fields = "date,text,w,h,dimension";
+	/**
+	 * Tutti gli operatori possibili
+	 */
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
+	/**
+	 * Oggetto utilizzato per interpretare il filtro
+	 */
 	private HashMap<String, ?> Object = new HashMap<>();
+	/**
+	 * Oggetto utilizzato per interpretare il filtro
+	 */
 	private int contatore;
+	/**
+	 * Oggetto utilizzato per interpretare il filtro
+	 */
 	private ArrayList<Object> Array = new ArrayList<Object>();
+	/**
+	 * Array che contiene gli operatori logici ($or, $and)
+	 */
 	private String[] logicalOperators;
+	/**
+	 * Oggetto utilizzato per interpretare il filtro
+	 */
 	private int size;
+	/**
+	 * Oggetto utilizzato per interpretare il filtro
+	 */
 	private ArrayList<String> btArray;
-	private boolean exception = false;
 
 	public ReadFilter() {
 		super();
 	}
+
+	/**
+	 * Metodo che individua se all'interno del filtro sono presenti $or o $and
+	 * 
+	 * @param obj
+	 * @throws WrongOperatorException
+	 * @throws WrongFormatExceptions
+	 * @throws WrongFieldException
+	 * @throws WrongValueException
+	 * @throws WrongDateFormatException
+	 */
 
 	@SuppressWarnings("unchecked")
 	public void FirstFilter(JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException,
@@ -74,6 +114,18 @@ public class ReadFilter extends FilterModel {
 			Filter(obj, "");
 	}
 
+	/**
+	 * Classe che individua i campi presenti nel filtro e ne estrai i rispettivi
+	 * valori
+	 * 
+	 * @param obj
+	 * @param LogicalOperator
+	 * @throws WrongOperatorException
+	 * @throws WrongFormatExceptions
+	 * @throws WrongFieldException
+	 * @throws WrongValueException
+	 * @throws WrongDateFormatException
+	 */
 	@SuppressWarnings("unchecked")
 	public void Filter(Object obj, String LogicalOperator) throws WrongOperatorException, WrongFormatExceptions,
 			WrongFieldException, WrongValueException, WrongDateFormatException {
@@ -98,6 +150,17 @@ public class ReadFilter extends FilterModel {
 		Filter(Aoperators, LogicalOperator);
 	}
 
+	/**
+	 * Classe che individua gli operatori presenti nel filtro, ne estre i valori e
+	 * chiama le funazioni AndFilter o OrFilter
+	 * 
+	 * @param Aoperators
+	 * @param LogicalOperator
+	 * @throws WrongOperatorException
+	 * @throws WrongValueException
+	 * @throws WrongDateFormatException
+	 * @throws WrongFormatExceptions
+	 */
 	@SuppressWarnings("unchecked")
 	public void Filter(String[] Aoperators, String LogicalOperator)
 			throws WrongOperatorException, WrongValueException, WrongDateFormatException, WrongFormatExceptions {
@@ -112,7 +175,6 @@ public class ReadFilter extends FilterModel {
 							btArray = new ArrayList<String>();
 							btArray = (ArrayList<String>) ((HashMap<String, ?>) Object).get(Aoperators[j]);
 						} catch (Exception e) {
-							exception = true;
 							throw new WrongFormatExceptions(Aoperators[j]);
 						}
 						Iterator<String> i = btArray.iterator();

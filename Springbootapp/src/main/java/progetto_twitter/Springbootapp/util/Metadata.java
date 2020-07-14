@@ -7,8 +7,15 @@ import org.json.simple.JSONArray;
 
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
-
+/**
+ * Classe che crea i metadata
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ *
+ */
 public class Metadata {
+	/**
+	 * Oggetto ArrayList che contiene i metadata
+	 */
 	private static ArrayList<MetaDataModel> MDArray = new ArrayList<MetaDataModel>();
 	public static ArrayList<MetaDataModel> getMDArray() {
 		return MDArray;
@@ -17,6 +24,9 @@ public class Metadata {
 	public void setMDArray(ArrayList<MetaDataModel> mDArray) {
 		MDArray = mDArray;
 	}
+	/**
+	 * Metodo che riempi l'ArrayList di metadata inseredo le informazioni all'interno di modelli pretabiliti
+	 */
 
 	public static void CMetaData() {
 		for (int i = 0; i < 8; i++) {

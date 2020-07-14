@@ -12,8 +12,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ * Classe che prende i JSON dalla timeline di twitter
+ */
 public class GETJson {
+	/**
+	 * Metodo che apre uno stream con le API di twitter e scarica i JSON
+	 */
 	public static void GETJ() {
 		JSONArray obj = null;
 		String url = "https://wd4hfxnxxa.execute-api.us-east-2.amazonaws.com/dev/user/1.1/statuses/user_timeline.json?user_id=2890854922&tweet_mode=extended&count=200";

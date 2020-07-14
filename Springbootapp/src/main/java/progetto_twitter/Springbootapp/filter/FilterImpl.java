@@ -9,12 +9,40 @@ import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.util.ListsCreate;
 import progetto_twitter.Springbootapp.util.ModifyDate;
 
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
+ * Classe che gestisce il filtraggio dei dati
+ *        
+ *
+ */
 public class FilterImpl {
+	/**
+	 * Oggetto utilizzato per scansionare la lista dei dati
+	 */
 	private JSONModel obj;
-	private ImgDateTextFilterImpl Object = new ImgDateTextFilterImpl();;
+	/**
+	 * Oggetto che contiene metodi per filtrare i dati rispetto a immagini, testo e
+	 * data
+	 */
+	private ImgDateTextFilterImpl Object = new ImgDateTextFilterImpl();
+	/**
+	 * Attributo booleano utilizzato per individuare i dati da rimuovere
+	 */
 	private boolean ToRemove;
 
-	public void AndFilter(String fields, ArrayList<String> values, String operator) throws WrongDateFormatException, WrongValueException {
+	/**
+	 * Metodo che gestisce i filtri contenenti tutti gli operatori, escluso
+	 * l'operatore $or
+	 * 
+	 * @param fields
+	 * @param values
+	 * @param operator
+	 * @throws WrongDateFormatException
+	 * @throws WrongValueException
+	 */
+	public void AndFilter(String fields, ArrayList<String> values, String operator)
+			throws WrongDateFormatException, WrongValueException {
 		Iterator<JSONModel> i = ListsCreate.Lists.getMList().iterator();
 		while (i.hasNext()) {
 			obj = new JSONModel();
@@ -26,6 +54,16 @@ public class FilterImpl {
 
 		}
 	}
+	/**
+	 * Metodo che gestisce i filtri contenenti l'operatore $or
+	 * @param fields
+	 * @param values
+	 * @param operator
+	 * @param contatore
+	 * @param size
+	 * @throws WrongDateFormatException
+	 * @throws WrongValueException
+	 */
 
 	public void OrFilter(String fields, ArrayList<String> values, String operator, int contatore, int size)
 			throws WrongDateFormatException, WrongValueException {
@@ -57,6 +95,15 @@ public class FilterImpl {
 		if (contatore == size)
 			ListsCreate.Lists.getToPushList().removeAll(ListsCreate.Lists.getToFilterList());
 	}
+	/**
+	 * Metodo che identifica il campo del quale è richiesto il filtro
+	 * @param fields
+	 * @param values
+	 * @param operator
+	 * @return ToRemove
+	 * @throws WrongDateFormatException
+	 * @throws WrongValueException
+	 */
 
 	public boolean FilterUtil(String fields, ArrayList<String> values, String operator)
 			throws WrongDateFormatException, WrongValueException {

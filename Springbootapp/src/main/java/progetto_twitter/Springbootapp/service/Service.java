@@ -15,24 +15,45 @@ import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
 import progetto_twitter.Springbootapp.model.StatsModel;
 import progetto_twitter.Springbootapp.model.WordModel;
-
+/**
+ * Interfaccia
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
+ *
+ */
 public interface Service {
-
+	/**
+	 * Metodo che gestisce la richiesta di filtraggio dei dati
+	 */
 	void GETFilter(JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException,
 			WrongValueException, WrongDateFormatException;
-
+	/**
+	 * Metodo che restituisce i dati
+	 */
 	ArrayList<JSONModel> GETData();
-
+	/**
+	 * Metodo che restituisce i dati filtrati
+	 */
 	ArrayList<JSONModel> GETDataFiltered();
-
+	/**
+	 * Metodo che restituisce i metadati
+	 * 
+	 */
 	ArrayList<MetaDataModel> GETMetaData();
-
+	/**
+	 * Metodo che gestisce la richiesta delle statistiche 
+	 */
 	ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException;
-
+	/**
+	 * Metodo che gestisce la richiesta della classifica di parole più utilizzate
+	 */
 	ArrayList<WordModel> GETWordList(String N) throws NumberFormatException;
-
+    /**
+     * Metodo che gestisce la richiesta della lista di hashtags
+     */
 	ArrayList<HashModel> GETHashList();
-
+    /**
+     * Metodo che gestisce la richiesta di statistiche su un insieme di dati filtrati
+     */
 	ArrayList<StatsModel> GETStatsFiltered(String stat, JSONObject obj)
 			throws WrongOperatorException, WrongFormatExceptions, WrongFieldException, WrongValueException,
 			WrongDateFormatException, WrongStatisticException;

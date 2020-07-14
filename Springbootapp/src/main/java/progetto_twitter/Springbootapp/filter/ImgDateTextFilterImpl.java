@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
+import org.springframework.data.repository.query.ReturnedType;
+
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongValueException;
 import progetto_twitter.Springbootapp.model.ImageModel;
@@ -16,8 +18,23 @@ import progetto_twitter.Springbootapp.util.GetMethods;
 
 
 import java.util.Date;
-
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ * Classe che filtra i dati in base alla lunghezza del testo, dimensioni delle immagini, data
+ *
+ */
 public class ImgDateTextFilterImpl implements ImgDateTextFilter {
+	/**
+	 * Metodo che ritorna true se il singolo dato è da eliminare in base alla lunghezza del testo
+	 * @return booleano
+	 * @param value
+	 * @param obj
+	 * @param operator
+	 * @param values
+	 * @throws WrongValueException
+	 * 
+	 */
 
 	public boolean FilteringofText(String value, JSONModel obj, String operator, ArrayList<String> values)
 			throws WrongValueException {
@@ -57,6 +74,17 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			return false;
 
 	}
+	/**
+	 * Metodo che ritorna true se il singolo dato è da eliminare in base alle dimansioni delle immagini
+	 * @return booleano
+	 * @param value
+	 * @param obj
+	 * @param operator
+	 * @param values
+	 * @param fields
+	 * @throws WrongValueException
+	 * 
+	 */
 
 	public boolean FilteringofImages(String fields, JSONModel obj, String value, String operator,
 			ArrayList<String> values) throws WrongValueException {
@@ -104,6 +132,16 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 		}
 		return true;
 	}
+	/**
+	 * Metodo che ritorna true se il singolo dato è da eliminare in base alla data
+	 * @return booleano
+	 * @param value
+	 * @param obj
+	 * @param operator
+	 * @param values
+	 * @throws WrongValueException
+	 * 
+	 */
 
 	public boolean FilteringofDate(JSONModel obj, String value, String operator, ArrayList<String> values)
 			throws WrongDateFormatException {
@@ -136,6 +174,14 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 	interface Operator {
 		boolean compare(int a, int b);
 	}
+	/**
+	 * Metodo utilizzato per comparare due date
+	 * @param obj
+	 * @param Op
+	 * @param value
+	 * @return booleano
+	 * @throws WrongDateFormatException
+	 */
 
 	public static boolean Compare(JSONModel obj, String Op, String value) throws WrongDateFormatException {
 		boolean bool = false;

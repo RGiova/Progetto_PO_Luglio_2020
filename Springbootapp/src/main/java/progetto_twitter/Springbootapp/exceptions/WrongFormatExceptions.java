@@ -1,5 +1,10 @@
 package progetto_twitter.Springbootapp.exceptions;
-
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ * Eccezione in caso si fornisca un filtro con formato errato
+ *
+ */
 public class WrongFormatExceptions extends Exception{
 
 public WrongFormatExceptions(String operator) {
