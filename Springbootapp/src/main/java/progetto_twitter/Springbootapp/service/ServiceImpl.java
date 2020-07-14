@@ -56,13 +56,13 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public ArrayList<StatsModel> GETStatistics(String stat) throws WrongStatisticException {
+	public ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException {
 		if (stat.equals("date") || stat.equals("url") || stat.equals("hashtags") || stat.equals("text")
 				|| stat.equals("image")) {
 			try {
-				return Choice.Stats(stat, StatObj, ListsCreate.Lists.getMList(),
-						StatObj.HashStats(ListsCreate.Lists.getMList()),
-						StatObj.WordStats(ListsCreate.Lists.getMList()));
+				return Choice.Stats(stat, StatObj, List,
+						StatObj.HashStats(List),
+						StatObj.WordStats(List));
 			} catch (WrongStatisticException e) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 			}
@@ -86,5 +86,9 @@ public class ServiceImpl implements Service {
 
 	public ArrayList<HashModel> GETHashList() {
 		return StatObj.HashStats(ListsCreate.Lists.getMList());
+	}
+	public ArrayList<StatsModel> GETStatsFiltered(String stat, JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException, WrongValueException, WrongDateFormatException, WrongStatisticException{
+		GETFilter(obj);
+		return GETStatistics(stat, GETDataFiltered());
 	}
 }

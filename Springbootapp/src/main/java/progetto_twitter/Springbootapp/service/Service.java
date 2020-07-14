@@ -25,6 +25,6 @@ public interface Service {
 
 	ArrayList<MetaDataModel> GETMetaData();
 
-	ArrayList<StatsModel> GETStatistics(String stat) throws WrongStatisticException;
+	ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException;
 
 }

@@ -43,7 +43,7 @@ public class Springbootcontroller {
 	@GetMapping("/statistics")
 	public ResponseEntity<Object> GETStatistics(@RequestParam String Stat)
 			throws WrongStatisticException {
-		return new ResponseEntity<Object>(Service.GETStatistics(Stat), HttpStatus.OK);
+		return new ResponseEntity<Object>(Service.GETStatistics(Stat,ListsCreate.Lists.getMList()), HttpStatus.OK);
 	}
 	@GetMapping("/wordlist")
 	public ResponseEntity<Object> GETWordlist(@RequestParam(defaultValue = "0") String N){
