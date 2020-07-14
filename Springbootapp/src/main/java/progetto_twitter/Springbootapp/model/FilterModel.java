@@ -38,7 +38,8 @@ public class FilterModel {
 	}
 	public void AddValue(String pippo) {
 		String[] ToAddValue = pippo.split(",");
-		for (int i = 0; i<ToAddValue.length;i++)
+		boolean add=true;
+		for (int i = 0; i<ToAddValue.length;i++) 
 		values.add(ToAddValue[i]);
 		}
 	

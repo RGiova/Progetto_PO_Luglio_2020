@@ -26,6 +26,7 @@ public class ReadFilter extends FilterModel {
 	private String[] logicalOperators;
 	private int size;
 	private ArrayList<String> btArray;
+	private boolean exception = false;
 
 	public ReadFilter() {
 		super();
@@ -111,6 +112,7 @@ public class ReadFilter extends FilterModel {
 							btArray = new ArrayList<String>();
 							btArray = (ArrayList<String>) ((HashMap<String, ?>) Object).get(Aoperators[j]);
 						} catch (Exception e) {
+							exception = true;
 							throw new WrongFormatExceptions(Aoperators[j]);
 						}
 						Iterator<String> i = btArray.iterator();
@@ -118,7 +120,7 @@ public class ReadFilter extends FilterModel {
 							AddValue((String) i.next());
 					} else
 						AddValue((String) ((HashMap<String, ?>) Object).get(Aoperators[j]));
-				} catch (Exception e) {
+				} catch (ClassCastException e) {
 					throw new WrongValueException();
 				}
 				k = j;

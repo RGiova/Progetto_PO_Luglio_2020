@@ -21,6 +21,8 @@ public class StatsImpl implements Stats {
 	public ArrayList<HashModel> HashStats(ArrayList<JSONModel> objp) {
 		Iterator<?> t = objp.iterator();
 		ArrayList<HashModel> HashList = new ArrayList<HashModel>();
+		if(objp.size()==0)
+			throw new NoneArgumentsExceptio;
 		while (t.hasNext()) {
 			JSONModel p1 = new JSONModel();
 			p1 = (JSONModel) t.next();

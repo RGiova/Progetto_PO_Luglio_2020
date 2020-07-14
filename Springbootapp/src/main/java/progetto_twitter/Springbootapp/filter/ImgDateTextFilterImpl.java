@@ -36,7 +36,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 		}
 		if (operator.equals("$not") && (obj.getText().length()) == (length))
 			return true;
-		else if ((operator.equals("$in") || operator.equals("nin"))) {
+		else if ((operator.equals("$in") || operator.equals("$nin"))) {
 			if (operator.equals("$in") && !values.contains(String.valueOf(obj.getText().length())))
 				return true;
 			if (operator.equals("$nin") && values.contains(String.valueOf(obj.getText().length())))
@@ -51,7 +51,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			return true;
 		else if ((operator.equals("$lte") && (obj.getText().length()) > (length)))
 			return true;
-		else if (operator.equals("$bt") && ((obj.getText().length()) < length1) || (obj.getText().length()) > length2)
+		else if (operator.equals("$bt") && (((obj.getText().length()) < length1) || (obj.getText().length()) > length2))
 			return true;
 		else
 			return false;
@@ -79,10 +79,10 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 		Iterator<ImageModel> k = ClassImg.iterator();
 		while (k.hasNext()) {
 			Object imgObject = (Object) k.next();
-			Long field = GetMethods.SearchMethod(fields, imgObject);
-			if (operator.equals("$not") && field.equals(value))
+			long field = GetMethods.SearchMethod(fields, imgObject);
+			if ((operator.equals("$not")) && (field==length))
 				return true;
-			else if (operator.equals("$in") || operator.equals("nin")) {
+			else if (operator.equals("$in") || operator.equals("$nin")) {
 				if (operator.equals("$in") && !values.contains(String.valueOf(field)))
 					return true;
 				if (operator.equals("$nin") && values.contains(String.valueOf(field)))
@@ -109,7 +109,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 			throws WrongDateFormatException {
 		if ((operator.equals("$not")) && (obj.getDate().equals(value)))
 			return true;
-		else if (operator.equals("$in") || operator.equals("nin")) {
+		else if (operator.equals("$in") || operator.equals("$nin")) {
 			if (operator.equals("$in") && !values.contains(obj.getDate()))
 				return true;
 			if (operator.equals("$nin") && values.contains(obj.getDate()))

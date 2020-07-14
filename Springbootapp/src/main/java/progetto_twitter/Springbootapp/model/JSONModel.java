@@ -12,7 +12,6 @@ private ArrayList<String> Url;
 private Vector<ImageModel> Img;
 private String name;
 private long user_id;
-private boolean to_insert = true;
 
 public long getPost_id() {
 	return post_id;
@@ -61,13 +60,6 @@ public long getUser_id() {
 }
 public void setUser_id(long l) {
 	this.user_id = l;
-}
-public boolean isTo_insert() {
-	return to_insert;
-}
-public void setTo_insert(boolean to_insert) {
-	this.to_insert = to_insert;
-}
 
-
+}
 }

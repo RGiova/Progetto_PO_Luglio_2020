@@ -66,7 +66,8 @@ public class ServiceImpl implements Service {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unrecognized param");
 
 	}
-
+	
+    @Override
 	public ArrayList<WordModel> GETWordList(String N) throws NumberFormatException {
 		int n;
 		try {
@@ -79,10 +80,12 @@ public class ServiceImpl implements Service {
 		else
 			return StatObj.WordStats(ListsCreate.Lists.getMList());
 	}
-
+    
+    @Override
 	public ArrayList<HashModel> GETHashList() {
 		return StatObj.HashStats(ListsCreate.Lists.getMList());
 	}
+    @Override
 	public ArrayList<StatsModel> GETStatsFiltered(String stat, JSONObject obj) throws WrongOperatorException, WrongFormatExceptions, WrongFieldException, WrongValueException, WrongDateFormatException, WrongStatisticException{
 		GETFilter(obj);
 		return GETStatistics(stat, GETDataFiltered());
