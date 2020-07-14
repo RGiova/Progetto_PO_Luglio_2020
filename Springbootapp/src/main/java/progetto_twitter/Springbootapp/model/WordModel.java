@@ -1,7 +1,5 @@
 package progetto_twitter.Springbootapp.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class WordModel extends HashModel {
 	private int length;
@@ -14,7 +12,7 @@ public class WordModel extends HashModel {
 	public WordModel(String text, int length) {
 		this.text= text;
 		this.length = length;
-		Occorrenze = 1;
+		Occurrences = 1;
 	}
 	
 

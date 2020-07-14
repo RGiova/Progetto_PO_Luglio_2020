@@ -1,35 +1,32 @@
 package progetto_twitter.Springbootapp.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class HashModel implements Comparable<HashModel>  {
 	protected String text;
-	protected int Occorrenze;
+	protected int Occurrences;
 	public String getText() {
 		return text;
 	}
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getOccorrenze() {
-		return Occorrenze;
+	public int getOccurrences() {
+		return Occurrences;
 	}
-	public void setOccorrenze(int occorrenze) {
-		Occorrenze = occorrenze;
+	public void setOccurrences(Integer Occurrences) {
+		this.Occurrences = Occurrences;
 	}
 	public HashModel(String text) {
 		this.text = text;
-		Occorrenze = 1;
+		Occurrences = 1;
 	}
 	public HashModel() {
 	}
 	@Override
 	public int compareTo(HashModel HashCompare) {
-    	int compareOcc=((HashModel)HashCompare).getOccorrenze();
+    	int compareOcc=((HashModel)HashCompare).getOccurrences();
 
 
     	/*In ordine decrescente*/
-    	return compareOcc-this.Occorrenze;
+    	return compareOcc-this.Occurrences;
 	}
 }
