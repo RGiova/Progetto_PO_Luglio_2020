@@ -169,14 +169,10 @@ public class StatsImpl implements Stats {
 	@Override
 	public ArrayList<WordModel> getTopN(ArrayList<WordModel> WordList, int N) throws EmptyArgumentsException {
 		if(WordList.size()==0) throw new EmptyArgumentsException();
-		int index = 0;
-		Iterator<?> t = WordList.iterator();
 		ArrayList<WordModel> WordListN = new ArrayList<WordModel>(N - 1);
-		while (t.hasNext() && index < N) {
-			WordListN.get(index).setText(WordList.get(index).getText());
-			WordListN.get(index).setLength(WordList.get(index).getLength());
-			WordListN.get(index).setOccurrences(WordList.get(index).getOccurrences());
-			index++;
+		for (int i = 0; i < N && i < WordList.size(); i++) {
+			WordModel Word = WordList.get(i);
+			WordListN.add(Word);
 		}
 		return WordListN;
 

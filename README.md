@@ -129,20 +129,26 @@ Alcuni esempi di filtri sono:
 ## Rotte
 Per eseguire le operazioni di cui sopra l'applicazione prevede diverse rotte:
 > **GET**/metadata
-
+![](GETMetaData.jpg)
 Fornisce tutti i metadati
+
 > **GET**/data
-
+![](GETData.jpg)
 Fornisce tutti i dati ottenuti
+
 > **GET**/statistics
-
+![](GETStatistics.jpg)
 Fornisce le statistiche relative al parametro specificato: Stat=statistica richiesta
-> **GET**/wordlist
 
+> **GET**/wordlist
+![](GETWordList.jpg)
+![](GETWordListN.jpg)
 Fornisce la lista delle parole più utilizzate con le relative occorrenze. Si può specificare un parametro denominato N per richiedere la top N delle parole.
+
 > **GET**/hashlist
-  
+![](GETHashList.jpg)
 Fornisce la lista degli hashtags con le relative occorrenze
+
 > **POST**/filter
 
 Fornisce i dati filtrati con il filtro posto nel corpo della richiesta

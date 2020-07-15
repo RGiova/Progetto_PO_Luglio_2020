@@ -7,5 +7,7 @@
 	<buildSpec>
 	</buildSpec>
 	<natures>
+		<nature>org.eclipse.sirius.nature.modelingproject</nature>
+		<nature>org.obeonetwork.dsl.uml2.core.umlProjectNature</nature>
 	</natures>
 </projectDescription>
