@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+import progetto_twitter.Springbootapp.exceptions.EmptyArgumentsException;
 import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
 import progetto_twitter.Springbootapp.exceptions.WrongFieldException;
 import progetto_twitter.Springbootapp.exceptions.WrongFormatExceptions;
@@ -41,21 +42,25 @@ public interface Service {
 	ArrayList<MetaDataModel> GETMetaData();
 	/**
 	 * Metodo che gestisce la richiesta delle statistiche 
+	 * @throws EmptyArgumentsException 
 	 */
-	ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException;
+	ArrayList<StatsModel> GETStatistics(String stat, ArrayList<JSONModel> List) throws WrongStatisticException, EmptyArgumentsException;
 	/**
 	 * Metodo che gestisce la richiesta della classifica di parole più utilizzate
+	 * @throws EmptyArgumentsException 
 	 */
-	ArrayList<WordModel> GETWordList(String N) throws NumberFormatException;
+	ArrayList<WordModel> GETWordList(String N) throws NumberFormatException, EmptyArgumentsException;
     /**
      * Metodo che gestisce la richiesta della lista di hashtags
+     * @throws EmptyArgumentsException 
      */
-	ArrayList<HashModel> GETHashList();
+	ArrayList<HashModel> GETHashList() throws EmptyArgumentsException;
     /**
      * Metodo che gestisce la richiesta di statistiche su un insieme di dati filtrati
+     * @throws EmptyArgumentsException 
      */
 	ArrayList<StatsModel> GETStatsFiltered(String stat, JSONObject obj)
 			throws WrongOperatorException, WrongFormatExceptions, WrongFieldException, WrongValueException,
-			WrongDateFormatException, WrongStatisticException;
+			WrongDateFormatException, WrongStatisticException, EmptyArgumentsException;
 
 }

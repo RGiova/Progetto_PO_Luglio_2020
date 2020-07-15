@@ -1,6 +1,8 @@
 package progetto_twitter.Springbootapp.util;
 
 import java.util.ArrayList;
+
+import progetto_twitter.Springbootapp.exceptions.EmptyArgumentsException;
 import progetto_twitter.Springbootapp.model.HashModel;
 import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.StatsModel;
@@ -19,8 +21,9 @@ public class Choice {
  * @param HList
  * @param WList
  * @return null 
+ * @throws EmptyArgumentsException 
  */
-	public static ArrayList<StatsModel> Stats(String stat,StatsImpl StatObj, ArrayList<JSONModel> List, ArrayList<HashModel> HList, ArrayList<WordModel> WList){
+	public static ArrayList<StatsModel> Stats(String stat,StatsImpl StatObj, ArrayList<JSONModel> List, ArrayList<HashModel> HList, ArrayList<WordModel> WList) throws EmptyArgumentsException{
 		switch (stat) {
 		case "date":		
 			return StatObj.DateminAvgMAX(List);
