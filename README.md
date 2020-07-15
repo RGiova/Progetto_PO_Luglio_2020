@@ -2,7 +2,8 @@
 L'applicazione consente di fare l'analisi dei tweets dell'utente VirusesMDPI, analizzandone il testo e i contenuti multimediali, facendone poi delle statistiche e permettendone il filtraggio. 
 ## Funzionamento
 All'avvio l'applicazione scarica i tweets in formato JSON e ne effettua il parsing inserendo, per ogni tweet, tutti i dati necessari in un modello appositamente costruito.
-Una volta creati e inseriti i modelli all'interno di una lista il programma attende istruzioni dall'utente. Esso può richiedere di filtrare o ottenere statistiche sui dati ottenuti.
+Una volta creati e inseriti i modelli all'interno di una lista il programma attende istruzioni dall'utente. Esso può richiedere i dati, i metadati, filtrare o ottenere statistiche sui dati ottenuti.
+![]Twitter_Project Sequence Diagram
 ## Statistiche
 Si ha la possibilità di ricevere statistiche su:
 
