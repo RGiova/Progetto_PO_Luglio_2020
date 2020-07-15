@@ -9,9 +9,18 @@ Si ha la possibilità di ricevere statistiche su:
 1) Numero di tweet per giorno, mese, anno
 2) Lunghezza delle parole presenti nel testo
 3) Numero di url presenti
-4) Numero di hashtags presenti, con le relative occorrenze
+4) Numero di hashtags presenti in un post
 5) Larghezza, altezza e dimensioni delle immagini
-6) Occorrenze delle parole più utilizzate, con la possibilità di ritornare la top N delle parole
+
+Per ottenere tali statistiche è necessario inserire un parametro denominato "Stat" e assegnargli i seguenti valori:
+
+1) date
+2) text
+3) url
+4) hashtags
+5) image
+
+È inoltre possibile richiedere anche la lista delle parole e degli hastags utilizzati, con le relative occorrenze. Il numero N delle parole presenti nella lista è impostabile dall'utente.
 
 Tutte queste statistiche possono essere calcolate a partire da tutto l'insieme dei dati ottenuti, oppure su un insieme più piccolo derivato da un operazione di filtraggio dei dati.
 ## Filtri
@@ -20,11 +29,11 @@ I filtri sono una stringa in formato JSON strutturata nel modo seguente:
 {"campo" : {"operatore" : "valore"}}
 ```
 Campo:
-- **date**: indica la data presente nei tweets
-- **text**: indica la lunghezza (per singolo carattere) del testo nei tweets
-- **w**: indica la larghezza delle immagini prenti nei tweets
-- **h**: indica l'altezza delle immagini presenti nei tweets
-- **dimension**: indica la dimensione delle immagini presenti nei tweets
+- **date**: specifica un filtro rispetto la data presente nei tweets
+- **text**: specifica un filtro rispetto alla lunghezza (per singolo carattere) del testo nei tweets
+- **w**: specifica un filtro rispetto alla larghezza delle immagini prenti nei tweets
+- **h**: specifica un filtro rispetto all'altezza delle immagini presenti nei tweets
+- **dimension**: specifica un filtro rispetto alla dimensione delle immagini presenti nei tweets
 
 Operatore:
 - **$not**: indica se il valore associato al campo è diverso da quello indicato nel filtro
@@ -37,8 +46,9 @@ Operatore:
 - **$bt**: indica se il valore associato al campo è compreso tra i due valori inseriti nel filtro (esclusi)
 
 È importante sottolineare che:
-1) L'applicazione accetta solo valori di tipo stringa. Quando si scrive un numero è dunque necessario scrivere <"numero">.
-2) Quando si inserisce una data è necessario scriverla nel seguente formato: "gg/mm/aaaa"
+1) L'applicazione accetta solo valori di tipo stringa. Quando si scrive un numero è dunque necessario scrivere "numero".
+2) Quando si inserisce una data è necessario scriverla nel seguente formato: "gg/mm/aaaa".
+
 Nel caso in cui non si verifichi ciò che scritto sopra l'applicazione restituirà degli errori personalizzati. 
 
 Il programma fornisce anche la possibilità di utilizzare più filtri inisieme attraverso l'uso di operatori logici quali: "$and", "$or". La strutura è la seguente:
