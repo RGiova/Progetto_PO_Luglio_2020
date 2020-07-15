@@ -163,6 +163,8 @@ Diagramma delle sequenze all'avvio dell'applicazione:
 
 Diagramma delle sequenze in caso di richiesta di un filtro:
 
+![](SequenceDiagram".jpg)
+
 
 
 
