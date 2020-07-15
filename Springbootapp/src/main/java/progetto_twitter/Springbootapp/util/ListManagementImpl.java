@@ -4,11 +4,27 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import progetto_twitter.Springbootapp.model.JSONModel;
-
+/**
+ * 
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ * Classe che gestisce tutte le liste presenti nel programma
+ */
 public class ListManagementImpl implements ListManagement {
+	/**
+	 * Oggetto ArrayList che contiene tutti i dati ottenuti dai tweets
+	 */
 	private static ArrayList<JSONModel> MList = new ArrayList<JSONModel>(300);
+	/**
+	 * Oggetto ArrayList che contiene i dati da mostrare dopo un eventuale filtraggio 
+	 */
 	private static ArrayList<JSONModel> TopushList = new ArrayList<JSONModel>(300);
+	/**
+	 * Oggetto ArrayList di appoggio utilizzato per il filtraggio
+	 */
 	private static ArrayList<JSONModel> ToFilterList;
+	/**
+	 * Oggetto ArrayList di appoggio utilizzato per il filtraggio
+	 */
 	private static ArrayList<JSONModel> ToFilterList2;
 
 	@Override
@@ -94,7 +110,12 @@ public class ListManagementImpl implements ListManagement {
 	public void ToFilterList2Create() {
 		ToFilterList2= new ArrayList<JSONModel>();
 	}
-	
+	/**
+	 * Metodo che copia gli elemti di una lista in un'altra
+	 * @param ListToCopy
+	 * @param CopiedList
+	 */
+	@Override
 	public void ListCopy(ArrayList<JSONModel> ListToCopy, ArrayList<JSONModel> CopiedList) {
 		Iterator<JSONModel> i = ListToCopy.iterator();
 		while(i.hasNext()) {

@@ -21,6 +21,12 @@ public interface ListManagement {
 	void ToFilterList2Delete(JSONModel Mdl);
 	void ToFilterList2Add(JSONModel Mdl);
 	void ToFilterList2Create();
+	/**
+	 * 
+	 * @param ListToCopy
+	 * @param CopiedList
+	 */
+	void ListCopy(ArrayList<JSONModel> ListToCopy, ArrayList<JSONModel> CopiedList);
 	
 	
 }

@@ -1,14 +1,16 @@
 package progetto_twitter.Springbootapp.util;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
-import org.json.simple.JSONArray;
-
-import progetto_twitter.Springbootapp.model.JSONModel;
 import progetto_twitter.Springbootapp.model.MetaDataModel;
-
+/**
+ * Classe che crea i metadata
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco
+ *
+ */
 public class Metadata {
+	/**
+	 * Oggetto ArrayList che contiene i metadata
+	 */
 	private static ArrayList<MetaDataModel> MDArray = new ArrayList<MetaDataModel>();
 	public static ArrayList<MetaDataModel> getMDArray() {
 		return MDArray;
@@ -17,6 +19,9 @@ public class Metadata {
 	public void setMDArray(ArrayList<MetaDataModel> mDArray) {
 		MDArray = mDArray;
 	}
+	/**
+	 * Metodo che riempie l'ArrayList di metadata inserendo le informazioni all'interno di modelli prestabiliti
+	 */
 
 	public static void CMetaData() {
 		for (int i = 0; i < 8; i++) {
