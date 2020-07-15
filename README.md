@@ -2,8 +2,10 @@
 L'applicazione consente di fare l'analisi dei tweets dell'utente VirusesMDPI, analizzandone il testo e i contenuti multimediali, facendone poi delle statistiche e permettendone il filtraggio. 
 ## Funzionamento
 All'avvio l'applicazione scarica i tweets in formato JSON e ne effettua il parsing inserendo, per ogni tweet, tutti i dati necessari in un modello appositamente costruito.
-Una volta creati e inseriti i modelli all'interno di una lista il programma attende istruzioni dall'utente. Esso può richiedere i dati, i metadati, filtrare o ottenere statistiche sui dati ottenuti.
-![](SequenceDiagram.jpg)
+Una volta creati e inseriti i modelli all'interno di una lista il programma attende istruzioni dall'utente. Esso può richiedere i dati, i metadati, filtrare o visionare statistiche sui dati ottenuti.
+
+![](UseCaseDiagram.jpg)
+
 ## Statistiche
 Si ha la possibilità di ricevere statistiche su:
 
@@ -13,7 +15,7 @@ Si ha la possibilità di ricevere statistiche su:
 4) Numero di hashtags presenti in un post
 5) Larghezza, altezza e dimensioni delle immagini
 
-Per ottenere tali statistiche è necessario inserire un parametro denominato "Stat" e assegnargli i seguenti valori:
+Per ottenere tali statistiche è necessario inserire un parametro con key = "Stat" e assegnargli uno dei seguenti valori:
 
 1) date
 2) text
@@ -21,7 +23,7 @@ Per ottenere tali statistiche è necessario inserire un parametro denominato "St
 4) hashtags
 5) image
 
-È inoltre possibile richiedere anche la lista delle parole e degli hastags utilizzati, con le relative occorrenze. Il numero N delle parole presenti nella lista è impostabile dall'utente.
+È inoltre possibile richiedere anche la lista delle parole e degli hashtags utilizzati, con le relative occorrenze. Il numero N delle parole presenti nella lista è impostabile dall'utente.
 
 Tutte queste statistiche possono essere calcolate a partire da tutto l'insieme dei dati ottenuti, oppure su un insieme più piccolo derivato da un operazione di filtraggio dei dati.
 ## Filtri
@@ -147,6 +149,19 @@ Fornisce i dati filtrati con il filtro posto nel corpo della richiesta
 > **POST**/filteredstats
 
 Fornisce le statistiche ottenute da un campione di dati filtrati. Si può sia inserire un filtro nel corpo della richiesta, sia inserire un parametro denominato "Stat" che specifichi la statistica richiesta
+
+## UML
+Diagramma delle classi:
+
+
+
+
+
+Diagramma delle sequenze all'avvio dell'applicazione:
+
+![](SequenceDiagram1.jpg)
+
+Diagramma delle sequenze in caso di richiesta di un filtro:
 
 
 
