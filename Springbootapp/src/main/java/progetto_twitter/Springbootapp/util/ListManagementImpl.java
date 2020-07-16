@@ -11,11 +11,11 @@ import progetto_twitter.Springbootapp.model.JSONModel;
  */
 public class ListManagementImpl implements ListManagement {
 	/**
-	 * Oggetto ArrayList che contiene tutti i dati ottenuti dai tweets
+	 * Oggetto ArrayList che contiene tutti i dati (codificati in JSONModel) ottenuti dai tweets
 	 */
 	private static ArrayList<JSONModel> MList = new ArrayList<JSONModel>(300);
 	/**
-	 * Oggetto ArrayList che contiene i dati da mostrare dopo un eventuale filtraggio 
+	 * Oggetto ArrayList che contiene i dati (codificati in JSONModel) da mostrare dopo un eventuale filtraggio 
 	 */
 	private static ArrayList<JSONModel> TopushList = new ArrayList<JSONModel>(300);
 	/**

@@ -27,13 +27,15 @@ public class FilterImpl {
 	 */
 	private ImgDateTextFilterImpl Object = new ImgDateTextFilterImpl();
 	/**
-	 * Attributo booleano utilizzato per individuare i dati da rimuovere
+	 * Attributo booleano utilizzato per individuare i dati da rimuovere. È true se lo specifico elemento della lista è da rimuovere
 	 */
 	private boolean ToRemove;
 
 	/**
-	 * Metodo che gestisce i filtri contenenti tutti gli operatori, escluso
-	 * l'operatore $or
+	 * Metodo che gestisce i filtri contenenti l'operatore logico $and o non contenenti operatori logici.
+	 * Chiama la funzione FilterUtil che restituisce true se l'elemento della lista è da rimuovere. In quel caso 
+	 * questo metodo lo elimina dalla lista.
+	 * 
 	 * 
 	 * @param fields
 	 * @param values
@@ -56,6 +58,9 @@ public class FilterImpl {
 	}
 	/**
 	 * Metodo che gestisce i filtri contenenti l'operatore $or
+	 * Chiama la funzione FilterUtil che restituisce true se l'elemento della lista è da rimuovere. In quel caso 
+	 * questo metodo utilizza due liste d'appoggio, per gestire la logica OR, nelle quali inserisce i dati da rimuovere.
+	 * Finiti i filtri tutti i dati da eliminare vengono tolti dalla lista finale (ToPushList). 
 	 * @param fields
 	 * @param values
 	 * @param operator
@@ -96,7 +101,7 @@ public class FilterImpl {
 			ListsCreate.Lists.getToPushList().removeAll(ListsCreate.Lists.getToFilterList());
 	}
 	/**
-	 * Metodo che identifica il campo del quale è richiesto il filtro
+	 * Metodo che identifica il campo del quale è richiesto il filtro e chiama le funzioni per fitlrare i dati.
 	 * @param fields
 	 * @param values
 	 * @param operator

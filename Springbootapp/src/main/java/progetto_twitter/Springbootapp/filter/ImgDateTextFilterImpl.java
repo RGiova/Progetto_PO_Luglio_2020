@@ -72,7 +72,7 @@ public class ImgDateTextFilterImpl implements ImgDateTextFilter {
 
 	}
 	/**
-	 * Metodo che ritorna true se il singolo dato è da eliminare in base alle dimansioni delle immagini
+	 * Metodo che ritorna true se il singolo dato è da eliminare in base alle dimensioni delle immagini
 	 * @return booleano
 	 * @param value
 	 * @param obj

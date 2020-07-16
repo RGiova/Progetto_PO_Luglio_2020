@@ -14,17 +14,17 @@ import org.json.simple.JSONObject;
 
 /**
  * 
- * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco Classe che
- *         legge e interpreta il filtro fornito
+ * @author Lorenzo Sopranzetti, Giovanni Recchi, Francesco Pigliapoco 
+ * Classe che legge e interpreta il filtro fornito
  *
  */
 public class ReadFilter extends FilterModel {
 	/**
-	 * Tutti i campi possibili
+	 * Tutti i campi possibili presenti nel filtro
 	 */
 	private String fields = "date,text,w,h,dimension";
 	/**
-	 * Tutti gli operatori possibili
+	 * Tutti gli operatori possibili presenti nel filtro
 	 */
 	private String operators = "$not,$in,$nin,$gt,$gte,$lt,$lte,$bt";
 	/**
@@ -57,7 +57,8 @@ public class ReadFilter extends FilterModel {
 	}
 
 	/**
-	 * Metodo che individua se all'interno del filtro sono presenti $or o $and
+	 * Metodo che individua se all'interno del filtro sono presenti $or o $and e
+	 * ne estrae i rispettivi valori.
 	 * 
 	 * @param obj
 	 * @throws WrongOperatorException

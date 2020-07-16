@@ -9,7 +9,7 @@ import progetto_twitter.Springbootapp.exceptions.WrongDateFormatException;
  */
 public class ModifyDate {
 	/**
-	 * Metodo che converte i mesi da parole a numeri
+	 * Metodo che converte i mesi da stringhe a numeri
 	 * @param date
 	 * @return la data nel formato giusto
 	 */

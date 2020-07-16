@@ -20,7 +20,7 @@ public class Metadata {
 		MDArray = mDArray;
 	}
 	/**
-	 * Metodo che riempie l'ArrayList di metadata inserendo le informazioni all'interno di modelli prestabiliti
+	 * Metodo che riempie l'ArrayList di metadata inserendo le informazioni all'interno di modelli prestabiliti (MetaDataModel).
 	 */
 
 	public static void CMetaData() {
