@@ -159,15 +159,43 @@ Fornisce le statistiche ottenute da un campione di dati filtrati. Si può sia in
 ## UML
 Diagramma delle classi:
 
+Package progetto_twitter.Springbootapp.model
+
+![](diagrammodel.png)
+
+Package progetto_twitter.Springbootapp.controller
+
+![](diagramcontroller.png)
+
+Package progetto_twitter.Springbootapp.filter
+
+![](diagramfilter.png)
+
+Package progetto_twitter.Springbootapp.util
+
+![](diagramutil.png)
 
 
+Package progetto_twitter.Springbootapp.service
+
+![](diagramservice.png)
+
+Package progetto_twitter.Springbootapp.GETJson
+
+![](diagramGETJson.png)
+
+Package progetto_twitter.Springbootapp.exceptions
+
+![](diagramexceptions.png)
+
+Diagramma delle sequenze:
 
 
-Diagramma delle sequenze all'avvio dell'applicazione:
+Diagramma delle sequenze all'avvio dell'applicazione
 
 ![](SequenceDiagram1.jpg)
 
-Diagramma delle sequenze in caso di richiesta di un filtro:
+Diagramma delle sequenze in caso di richiesta di un filtro
 
 ![](SequenceDiagram02.jpg)
 
