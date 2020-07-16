@@ -10,10 +10,13 @@ import java.util.*;
  */
 
 public class ModelList {
+	
+
 	static List<JSONModel> MList = new ArrayList<JSONModel>();
 	
 	/**
 	 * Metodo per aggiungere modelli alla lista
+	 * @param Mdl
 	 */
 	
 public static void ListAdd(JSONModel Mdl) {

@@ -39,12 +39,12 @@ public class StatsImpl implements Stats {
 			boolean found = false;
 			int index = 0;
 
-			/** 
+			/*
 			 * Si scorre hash per controllare tutte le hastag utilizzate nel post 
 			 * */
 
 			for (int j = 0; j < hash.size(); j++) {
-				/** 
+				/**
 				 * Si scorre HashList per constatare se l'hashtag è già stata utilizzata o meno
 				 *  Nel caso la lista sia vuota, si aggiunge direttamente l'elemento
 				 */
@@ -56,7 +56,7 @@ public class StatsImpl implements Stats {
 						}
 					}
 					
-					/**
+					/*
 					 * Viene incrementato il campo Occurrences dell' hastag se questa è già in lista,
 					 * altrimenti viene inserita in coda
 					 */
@@ -267,7 +267,7 @@ public class StatsImpl implements Stats {
 		int index = 0;
 		int urls = 0;
 		
-		/**
+		/*
 		 * Si scorrono con un iterator i modelli della lista e vengono calcolate 
 		 * le statistiche, tenendo conto del numero totale di url
 		 */
@@ -322,7 +322,7 @@ public class StatsImpl implements Stats {
 		Calendar thisCal = Calendar.getInstance();
 		Calendar lastCal = Calendar.getInstance();
 		
-		/**
+		/*
 		 * Si scorrono con un iterator i modelli della lista e vengono calcolate 
 		 * le statistiche, tenendo conto del numero totale di giorni e tweet
 		 */
@@ -340,7 +340,7 @@ public class StatsImpl implements Stats {
 			
 			if (DayTweetCount == 0) lastCal.setTime(thisDate);
 			
-			/**
+			/*
 			 * Viene controllata la data del tweet e, a seconda della variazione
 			 * (giorno, mese o anno), vengono incrementati i valori dei tweet
 			 * giornalieri, mensili e annuali. Ad ogni cambio vengono anche calcolati
@@ -361,7 +361,7 @@ public class StatsImpl implements Stats {
 						TotalTweets += DayTweetCount;
 						DayTweetCount = 1;
 					}
-					/**
+					/*
 					 * Una volta fatto un cambio, la variabile dei tweet periodici (es. giornaliera)
 					 * viene resettata a 1, cioè il tweet che stiamo analizzando in questo ciclo
 					 */
@@ -391,7 +391,7 @@ public class StatsImpl implements Stats {
 			}
 
 		}
-		/**
+		/*
 		 * Se non c'è mai un cambio di mese o anno, vengono valorizzati a 1 i totali
 		 * per permettere il calcolo delle medie, e vengono copiati i valori del periodo più piccolo
 		 */
