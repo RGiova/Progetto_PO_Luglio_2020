@@ -32,7 +32,7 @@ public class GetImage {
 	 */
 	private static Vector<ImageModel> Img;
 	/**
-	 * Metodo che prende le informazioni relative alle immagini contenute in un posto inserendole all'interno di un modello che viene aggiunto all'interno di un Vector
+	 * Metodo che prende le informazioni relative alle immagini contenute in un post inserendole all'interno di un modello che viene aggiunto all'interno di un Vector
 	 * @param ImgObj
 	 * @return Img
 	 */
