@@ -75,7 +75,7 @@ public class StatsImpl implements Stats {
 			}
 
 		}
-
+		Collections.sort(HashList);
 		return HashList;
 
 	}
