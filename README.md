@@ -199,6 +199,12 @@ Diagramma delle sequenze in caso di richiesta di un filtro
 
 ![](SequenceDiagram02.jpg)
 
+##AUTORI
+Apporto al progetto: 
+-Sopranzetti Lorenzo: classi JSONModel, FilterModel, GetMethods, ListManagement, ListManagementImpl, ListCreate, ModifyDate, package Service, package GETJson, package filter, package Exceptions, package Test, documentazione delle proprie classi, revisioni e correzioni su modellazione, documentazione e applicazione, README
+-Recchi Giovanni: classi Stats, StatsImpl, HashModel, WordModel, StatsModel, EmptyArgumentsException documentazione delle proprie classi, revisioni e correzioni su modellazione, documentazione e applicazione, README
+-Pigliapoco Francesco :classi ImageModel, MetaDataModel, ModelList, Data, MetaData, Choice, documentazione delle proprie classi, README
+
 
 
 
