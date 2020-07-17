@@ -105,7 +105,7 @@ public class Springbootcontroller {
 		return new ResponseEntity<Object>(Service.GETHashList(), HttpStatus.OK);
 	}
 	/**
-	 * Root che gestisce le statistiche su un isieme di dati filtrati
+	 * Root che gestisce le statistiche su un insieme di dati filtrati
 	 * @param Stat
 	 * @param body
 	 * @return La classe che restituisce le statistiche su un insieme di dati filtrati
