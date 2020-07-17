@@ -127,7 +127,7 @@ Alcuni esempi di filtri sono:
 }
 ```
 ## Rotte
-Per eseguire le operazioni di cui sopra l'applicazione prevede diverse rotte:
+Per eseguire tali operazioni, l'applicazione prevede diverse rotte:
 > **GET**/metadata
 ![](GETMetaData.jpg)
 Fornisce tutti i metadati
