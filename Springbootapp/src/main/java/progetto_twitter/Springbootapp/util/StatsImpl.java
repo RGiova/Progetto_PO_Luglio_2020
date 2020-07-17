@@ -40,7 +40,7 @@ public class StatsImpl implements Stats {
 			int index = 0;
 
 			/*
-			 * Si scorre hash per controllare tutte le hastag utilizzate nel post 
+			 * Si scorre hash per controllare tutte le hashtag utilizzate nel post 
 			 * */
 
 			for (int j = 0; j < hash.size(); j++) {
@@ -57,7 +57,7 @@ public class StatsImpl implements Stats {
 					}
 					
 					/*
-					 * Viene incrementato il campo Occurrences dell' hastag se questa è già in lista,
+					 * Viene incrementato il campo Occurrences dell'hashtag se questa è già in lista,
 					 * altrimenti viene inserita in coda
 					 */
 					
@@ -416,7 +416,7 @@ public class StatsImpl implements Stats {
 	}
 	/**
 	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
-	 * riguardanti le occorrenze degli hastag utilizzati dall'utente nei post
+	 * riguardanti le occorrenze degli hashtag utilizzati dall'utente nei post
 	 * 
 	 * @param HashList
 	 * @throws EmptyArgumentsException
@@ -449,7 +449,7 @@ public class StatsImpl implements Stats {
 	
 	/**
 	 * Metodo che calcola le statistiche (minimo, massimo, media e deviazione standard)
-	 * riguardanti la lunghezza delle parole utilizzate nei post nei post
+	 * riguardanti la lunghezza delle parole utilizzate nei post 
 	 * 
 	 * @param WordList
 	 * @throws EmptyArgumentsException
