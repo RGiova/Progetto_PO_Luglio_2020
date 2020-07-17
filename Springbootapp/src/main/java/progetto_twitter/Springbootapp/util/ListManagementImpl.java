@@ -111,7 +111,7 @@ public class ListManagementImpl implements ListManagement {
 		ToFilterList2= new ArrayList<JSONModel>();
 	}
 	/**
-	 * Metodo che copia gli elemti di una lista in un'altra
+	 * Metodo che copia gli elementi di una lista in un'altra
 	 * @param ListToCopy
 	 * @param CopiedList
 	 */
