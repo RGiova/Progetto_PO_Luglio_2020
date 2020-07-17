@@ -21,7 +21,7 @@ public class JSONParse {
 
 	/**
 	 * Funzione che effettua il parsing dai JSON inserendo le informazioni
-	 * desiderate all'interno di un apposito modello. Aggiungendolo poi ad una
+	 * desiderate all'interno di un apposito modello, aggiungendolo poi ad una
 	 * lista.
 	 * 
 	 * @param objp
